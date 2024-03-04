@@ -18,7 +18,7 @@ const App = () => {
 
   return (
     <div className="container">
-      <h1>This is stored in App.js</h1>
+      <h1>Team 67</h1>
       <TodoForm onAdd={addTodo} />
       <ul>
         {todos.map((todo) => (
