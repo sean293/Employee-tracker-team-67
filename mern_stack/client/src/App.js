@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TodoForm from './TodoForm';
-import './styles/App.css'; // Import the custom styles
+// import './styles/App.css'; // Import the custom styles
 
 const App = () => {
   const [todos, setTodos] = useState([]);
