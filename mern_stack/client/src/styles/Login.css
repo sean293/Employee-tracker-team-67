@@ -76,6 +76,7 @@ button:hover {
 } */
 
 p {
+	font-size: 20px;
 	color: red;
 	position: absolute;
 	top: 75%;
