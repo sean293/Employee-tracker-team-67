@@ -7,6 +7,7 @@ import Home from './Home';
 import Login from './Login';
 import Projects from './Projects';
 import ErrorPage from './error-page';
+import Register from './Register'
 
 import reportWebVitals from './reportWebVitals';
 
@@ -28,7 +29,9 @@ const router = createBrowserRouter([
 				element: <Projects />
 			},
 			{
-			}
+				path: '/register',
+				element: <Register />,
+			},
 		]
 	}
 ])
