@@ -16,6 +16,8 @@ Install [node.js](https://nodejs.org/en) and [MongoDB](https://www.mongodb.com/t
 
 Open MongoDB Compass and make a new connetion to `mongodb://localhost:27017` (should be the default).
 
+While in the `/mern_stack` and `/mern_stack/client` directories run `npm install` to get all needed dependencies from the `package.json` files.
+
 To start the backend run `node server.js` when in the `/mern_stack` directory.  Leave this terminal open.
 
 To start the frontend run `npm start` when in the `/mern_stack/client` directory. Leave this terminal open.
