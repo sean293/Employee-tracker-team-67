@@ -1,17 +1,17 @@
 import {useNavigate} from 'react-router-dom';
+import React from 'react';
+import {useAuth} from './AuthContext';
 
 import './styles/Project.css'
 
 export default function Projects(){
 	const navigate = useNavigate();
+	const {logout} = useAuth();
 
-	const handleLogin = () => {
+	const handleLogOut = () => {
 		// verify login info
-		navigate('/app')
-	}
-	const handleRegister = () => {
-		// verify login info
-		navigate('/app')
+		logout();
+		navigate('/');
 	}
 
 	return (
@@ -27,6 +27,7 @@ export default function Projects(){
 				<button class="project-grid-item">Project 8</button>
 				<button class="project-grid-item">Project 9</button>
 			</div>
+			<button class="logout" onClick={handleLogOut}>Log Out</button>
 		</div>
 	);
 }

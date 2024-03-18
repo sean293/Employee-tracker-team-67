@@ -5,7 +5,7 @@
 	position:absolute;
 	top:100px;
 	/* max-height: 100% - 100px; */
-	height: calc(100% - 100px);
+	height: calc(90% - 100px);
 	width: 100%;
 }
 
@@ -27,4 +27,11 @@
 	font-family: 'Work Sans';
 	font-size: 24px;
 	font-weight: 500;
+}
+
+.logout{
+	position: absolute;
+	left: 50%;
+	top: 90%;
+	transform: translate(-50%, 50%);
 }

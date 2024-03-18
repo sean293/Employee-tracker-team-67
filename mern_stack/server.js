@@ -13,7 +13,6 @@ app.use((err, req, res, next) => {
     res.status(500).send('Internal Server Error');
 });
 
-
 const User = require('./client/models/User.js');
 
 app.post('/register', async (req, res) => {
@@ -55,12 +54,29 @@ app.post('/login', async (req, res) => {
 		}
 		const token = jwt.sign({userId: user._id}, 'your_secret_key', {expiresIn: '1h'});
 		res.json({token});
+		console.log(token);
 	} catch (err) {
 		console.error('Error registering user:', err);
 		res.status(500).json({msg: "Server Error"});
 	}
 });
 
+
+app.get('/projects', async (req, res) => {
+	try {
+		// Find all associations for the user
+		const associations = await Association.find({ user: userId }).populate('project');
+		
+		// Extract the projects from associations
+		const projects = associations.map(assoc => assoc.project);
+		
+		// Send the list of projects to the client
+		res.json(projects);
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: 'Internal Server Error' });
+	}
+});
 
 // Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/Team67', { useNewUrlParser: true, useUnifiedTopology: true });

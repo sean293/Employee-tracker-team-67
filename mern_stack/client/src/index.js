@@ -9,6 +9,8 @@ import Projects from './Projects';
 import ErrorPage from './error-page';
 import Register from './Register'
 
+import {AuthProvider} from './AuthContext'
+
 import reportWebVitals from './reportWebVitals';
 
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
@@ -38,7 +40,9 @@ const router = createBrowserRouter([
 
 root.render(
   <React.StrictMode>
-	<RouterProvider router={router} />
+	<AuthProvider>
+		<RouterProvider router={router} />
+	</AuthProvider>
   </React.StrictMode>
 );
 

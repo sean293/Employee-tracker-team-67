@@ -1,6 +1,7 @@
 import {useNavigate} from 'react-router-dom';
 import React, { useState } from 'react';
 import axios from 'axios';
+import {useAuth} from './AuthContext'
 
 import './styles/Login.css'; // Import the custom styles
 import './index.css'
@@ -21,8 +22,9 @@ export default function Login(){
 	};
 
 
+	const {login} = useAuth();
 	const handleLogin = async (e) => {
-
+		
 		e.preventDefault();
 
 		if (!username || !password){
@@ -35,10 +37,11 @@ export default function Login(){
 				username,
 				password
 			});
-			setErrorMessage('Login successful');
-			setTimeout(() => {
-					navigate('/');
-			}, 1000);
+			// localStorage.setItem('token', res.data.token);
+			// localStorage.setItem('username', username);
+			login(username);
+			// setErrorMessage('Login successful, '+res.data.token);
+			navigate('/projects');
 		} catch (err) {
 			setErrorMessage("ERROR: "+err.response.data.msg);
 		}
