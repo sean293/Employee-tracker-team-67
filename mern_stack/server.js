@@ -1,62 +1,97 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+jwt = require('jsonwebtoken')
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 app.use(cors());
 app.use(express.json());
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Internal Server Error');
+});
+
+const User = require('./client/models/User.js');
+
+app.post('/register', async (req, res) => {
+	try {
+		console.log("TRYING TO POST");
+		const {username, email, password} = req.body;
+		
+		let user = await User.findOne({email});
+		if (user) {
+			return res.status(400).json({msg: 'User already exists'});
+		}
+		
+		user = new User({
+			username,
+			email,
+			password
+		});
+		
+		await user.save();
+		
+		return res.status(201).json({msg: 'User registered successfully'});
+	} catch (err) {
+		console.error('Error registering user:', err);
+		return res.status(500).json({ msg: 'Server Error' });
+	}
+});
+
+app.post('/login', async (req, res) => {
+	console.log("TRYING TO POST");
+	const {username, password} = req.body;
+	try {
+		const user = await User.findOne({$or: [{username}, {email: username}]});
+		if (!user) {
+			return res.status(401).json({msg: 'Invalid credidentials.'});
+		}
+		if (password != user.password)
+		{
+			return res.status(401).json({msg: 'Invalid credidentials.'});
+		}
+		const token = jwt.sign({userId: user._id}, 'your_secret_key', {expiresIn: '1h'});
+		res.json({token});
+		console.log(token);
+	} catch (err) {
+		console.error('Error registering user:', err);
+		res.status(500).json({msg: "Server Error"});
+	}
+});
+
+
+app.get('/projects', async (req, res) => {
+	try {
+		// Find all associations for the user
+		const associations = await Association.find({ user: userId }).populate('project');
+		
+		// Extract the projects from associations
+		const projects = associations.map(assoc => assoc.project);
+		
+		// Send the list of projects to the client
+		res.json(projects);
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: 'Internal Server Error' });
+	}
+});
+
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost/mern-stack-db', { useNewUrlParser: true, useUnifiedTopology: true });
-// Get MongoDB driver connection
-const dbo = require("./db/conn");
- 
-app.listen(port, () => {
-  // Perform a database connection when server starts
-  dbo.connectToServer(function (err) {
-    if (err) console.error(err);
- 
-  });
-  console.log(`Server is running on port: ${port}`);
+mongoose.connect('mongodb://localhost:27017/Team67', { useNewUrlParser: true, useUnifiedTopology: true });
+
+// Listen for successful connection
+mongoose.connection.on('connected', () => {
+	console.log('MongoDB connected');
+
+	// Start the server
+	app.listen(PORT, () => {
+		console.log(`Server is running on port: ${PORT}`);
+	});
 });
 
-const todoSchema = new mongoose.Schema({
-    task: String,
-    completed: Boolean,
-  });
-
-  const Todo = mongoose.model('Todo', todoSchema);
-
-  // Add this to server.js
-
-app.get('/todos', async (req, res) => {
-    const todos = await Todo.find();
-    res.json(todos);
-  });
-
-  // Update App.js
-
-// ... (existing code)
-useEffect(() => {
-    axios.get('http://localhost:5000/todos')
-      .then(response => setTodos(response.data))
-      .catch(error => console.error(error));
-  }, []);
-// ... (existing code)
-
-// Create a new todo
-app.post('/todos', async (req, res) => {
-    const newTodo = new Todo(req.body);
-    await newTodo.save();
-    res.json(newTodo);
-  });
-// Update an existing todo
-app.put('/todos/:id', async (req, res) => {
-const updatedTodo = await Todo.findByIdAndUpdate(req.params.id, req.body, { new: true });
-res.json(updatedTodo);
-});
-// Delete a todo
-app.delete('/todos/:id', async (req, res) => {
-await Todo.findByIdAndRemove(req.params.id);
-res.json({ message: 'Todo deleted successfully' });
+// Listen for connection errors
+mongoose.connection.on('error', (err) => {
+	console.error('Error connecting to MongoDB:', err);
 });
