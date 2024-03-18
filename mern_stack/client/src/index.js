@@ -36,11 +36,11 @@ const router = createBrowserRouter([
 			},
 		]
 	}
-])
+]);
 
 root.render(
-  <React.StrictMode>
-	<AuthProvider>
+	<React.StrictMode>
+	  <AuthProvider>
 		<RouterProvider router={router} />
 	</AuthProvider>
   </React.StrictMode>

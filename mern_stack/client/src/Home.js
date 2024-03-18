@@ -8,7 +8,7 @@ import './index.css'
 
 const Home = () => {
 	const navigate = useNavigate();
-	const {user, logout} = useAuth();
+	const {user} = useAuth();
 
 	const handleHome = () => {
 		navigate('/')

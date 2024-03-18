@@ -13,7 +13,50 @@ app.use((err, req, res, next) => {
     res.status(500).send('Internal Server Error');
 });
 
-const User = require('./client/models/User.js');
+const User = require('./client/models/User');
+const Project = require('./client/models/Project')
+const Association = require('./client/models/Association')
+
+app.post('/newProject', async (req, res) => {
+	const { username, title, description } = req.body;
+    console.log(username, title, description);
+	const user = await User.findOne({username: username});
+	try {
+		let project = new Project({
+			title,
+			description
+		});
+		
+		await project.save();
+
+		let association = new Association({
+			user: user,
+			project, project
+		});
+
+		await association.save();
+		
+		return res.status(201).json({msg: 'Project registered successfully'});
+	} catch (err) {
+		console.error('Error registering project:', err);
+		return res.status(500).json({ msg: 'Server Error' });
+	}
+});
+
+app.get('/getProjects', async (req, res) => {
+	const userId = req.query.username;
+	console.log("getting projects from "+userId);
+	const user = await User.findOne({username: userId});
+	try {
+		// Fetch all projects from the database
+		// console.log("finding projects under "+user);
+		const projects = await Association.find({user: user});
+		res.status(200).json({ success: true, projects });
+	} catch (err) {
+		console.error('Error fetching projects:', err);
+		res.status(500).json({msg: 'Failed to fetch projects' });
+	}
+});
 
 app.post('/register', async (req, res) => {
 	try {
