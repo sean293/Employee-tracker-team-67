@@ -1,3 +1,7 @@
+// src/AuthContext.js
+
+// manages global user data for login/logout
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext();

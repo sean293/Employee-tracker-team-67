@@ -1,3 +1,7 @@
+// model/Project.js
+
+// for creating new projects
+
 const mongoose = require('mongoose');
 
 // Project Schema

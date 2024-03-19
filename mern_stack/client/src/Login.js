@@ -1,10 +1,14 @@
+// src/Login.js
+
+// login page that queries database
+
 import {useNavigate} from 'react-router-dom';
 import React, { useState } from 'react';
 import axios from 'axios';
 import {useAuth} from './AuthContext'
 
-import './styles/Login.css'; // Import the custom styles
-import './index.css'
+import './styles/Login.css';
+import './styles/index.css'
 
 export default function Login(){
 	const navigate = useNavigate();
@@ -21,7 +25,6 @@ export default function Login(){
 		setFormData({...formData, [e.target.name]: e.target.value});
 	};
 
-
 	const {login} = useAuth();
 	const handleLogin = async (e) => {
 		
@@ -37,19 +40,14 @@ export default function Login(){
 				username,
 				password
 			});
-			// localStorage.setItem('token', res.data.token);
-			// localStorage.setItem('username', username);
 			login(username);
-			// setErrorMessage('Login successful, '+res.data.token);
 			navigate('/projects');
 		} catch (err) {
-			setErrorMessage("ERROR: "+err.response.data.msg);
+			setErrorMessage("ERROR: ");
 		}
-
-		
 	};
 
-	const handleRegister = async (e) => {
+	const handleRegister = async () => {
 		navigate('/register');
 	};
 
@@ -64,4 +62,4 @@ export default function Login(){
 			{errorMessage && <p type="message">{errorMessage}</p>}
 		</div>
 	);
-}
+};

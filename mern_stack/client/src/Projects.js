@@ -1,3 +1,7 @@
+// src/projects.js
+
+// once user is logged in, shows 
+
 import {useNavigate } from 'react-router-dom';
 import React, {useState, useEffect} from 'react';
 import {useAuth} from './AuthContext';
@@ -32,7 +36,7 @@ export default function Projects(){
 				description: description
 			});
 			setErrorMessage("NEW PROJECT CREATED: "+title);
-			//setProjects(res.data.projects);
+			setProjects(res.data.projects);
 		} catch (err) {
 			setErrorMessage("ERROR: "+err.data.msg);
 		}
@@ -40,36 +44,48 @@ export default function Projects(){
 
 	useEffect(() => {
 		const fetchProjects = async () => {
-		try {
-			const response = await axios.get('http://localhost:5000/getProjects', {
-				params: {
-					username: user
+
+			// if user not logged in, show error
+			if (!user) {
+				navigate('/error');
+				return;
+			}
+
+			try {
+				const response = await axios.get('http://localhost:5000/getProject', {
+					params: {
+						username: user
+					}
+				});
+
+				if (!response.data.success) {
+					setErrorMessage('Failed to fetch projects');
 				}
-			}); // Assuming endpoint to fetch projects
-			if (!response.data.success) {
-				setErrorMessage('Failed to fetch projects');
+				else
+				{
+					setErrorMessage("user "+user);
+				}
+
+				// populate projects
+				setProjects(response.data.projects);
+				console.log("projects found:",response.data.projects);
+			} catch (err) {
+				setErrorMessage('Error fetching projects:', err);
 			}
-			else
-			{
-				setErrorMessage("user "+user);
-			}
-			setProjects(response.data.projects);
-		} catch (err) {
-			setErrorMessage('Error fetching projects:', err);
-		}
 		};
 
 		fetchProjects();
-	}, []); // Empty dependency array ensures this effect runs only once
+	}, []); // empty array ensures this effect runs only once
 
 	return (
 		<div>
 			<div className="project-grid">
-			{projects.map(project => (
+			{/* maps our list of projects to buttons in the grid */}
+			{projects && projects.map(project => (
 				<button className="project-grid-item" key={project._id}>
 					{project.title}
 				</button>
-        	))}
+			))}
 			</div>
 			<button className="logout" onClick={handleLogOut}>Log Out</button>
 			<button className="newProject" onClick={handleNewProject}>New Project</button>
