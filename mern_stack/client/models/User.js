@@ -21,10 +21,11 @@ const userSchema = new mongoose.Schema({
 		required: true,
 		unique: true
 	},
-	createdAt: {
-		type: Date,
-		default: Date.now
-	}
+	clock_in_out_id: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'ClockInOut',
+		default: null
+	},
 });
 
 module.exports = mongoose.model('User', userSchema);
