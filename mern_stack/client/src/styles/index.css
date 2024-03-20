@@ -20,12 +20,7 @@ p{
 	font-family: 'Work Sans';
 	font-size: 40px;
 	font-weight: 500;
-	
 	color: white;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 }
 
 h1{
@@ -34,29 +29,58 @@ h1{
 	font-weight: 500;
 
 	color: white;
+
+	padding: 0;
+	margin: 0;
+}
+
+h2{
+	font-family: 'Work Sans';
+	font-size: 20px;
+	font-weight: 500;
+
+	color: white;
+}
+
+.navbar-text{
+	display: inline-block;
 	cursor:pointer;
-	position: relative;
-	transform: translate(-50%, -100%);
 	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	top: 50%;
 }
 
 #home{
 	position: absolute;
-	left: 50%;
+	left: calc(100% * 3 / 6);
+}
+
+#back
+{
+	position: absolute;
+	left: calc(100% / 6);
 }
 
 #login{
 	position: absolute;
 	font-size: 20px;
-	left: 90%;
+	left: calc(100% * 5 / 6);
 }
 
-div.navigation{
+.navigation{
+	position: fixed;
+	top: 0px;
 	width: 100%;
 	height: 100px;
 	background: rgba(0, 0, 0, 0.25);
-	position: relative;
+	justify-content: center;
+}
+
+.content{
+	margin-top: 100px;
+	height: calc(100vh - 100px);
 }
 
 #projects {

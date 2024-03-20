@@ -1,9 +1,13 @@
+// src/Register.js
+
+// register page which adds new user to database
+
 import {useNavigate} from 'react-router-dom';
 import React, { useState } from 'react';
 import axios from 'axios';
 
 import './styles/Login.css'; // Import the custom styles
-import './index.css'
+import './styles/index.css'
 
 export default function Register(){
 	const navigate = useNavigate();
@@ -14,6 +18,7 @@ export default function Register(){
 		password: ''
 	});
 
+	// stores the data from the input boxes on the frontend
 	const {username, email, password} = formData;
 
 	const [errorMessage, setErrorMessage] = useState('');
@@ -33,12 +38,16 @@ export default function Register(){
 		}
 
 		try {
+			// backend call that makes the new user
 			const res = await axios.post('http://localhost:5000/register', {
 				username,
 				email,
 				password
 			});
+
 			setErrorMessage('User Created');
+
+			// redirect to login after 1 second
 			setTimeout(() => {
 					navigate('/login');
 			}, 1000);
