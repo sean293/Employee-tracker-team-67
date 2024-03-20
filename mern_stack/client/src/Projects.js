@@ -2,7 +2,7 @@
 
 // once user is logged in, shows 
 
-import {useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import React, {useState, useEffect} from 'react';
 import {useAuth} from './AuthContext';
 import axios from 'axios';
@@ -19,6 +19,11 @@ export default function Projects(){
 		// verify login info
 		logout();
 		navigate('/');
+	};
+
+	const handleProjectClick = (project) => {
+		// verify login info
+		navigate(`/projects/${project.title}`);
 	};
 
 	const handleNewProject = async (e) => {
@@ -78,18 +83,20 @@ export default function Projects(){
 	}, []); // empty array ensures this effect runs only once
 
 	return (
-		<div>
+		<div className='content'>
 			<div className="project-grid">
 			{/* maps our list of projects to buttons in the grid */}
 			{projects && projects.map(project => (
-				<button className="project-grid-item" key={project._id}>
-					{project.title}
-				</button>
+				<div key={project._id} onClick={() => handleProjectClick(project)} className="project-grid-item">
+					<p className="project-grid-text">{project.title}</p>
+				</div>
 			))}
 			</div>
-			<button className="logout" onClick={handleLogOut}>Log Out</button>
-			<button className="newProject" onClick={handleNewProject}>New Project</button>
-			{errorMessage && <p type="message">{errorMessage}</p>}
+			<div className="button-bar">
+				<button className="logout" onClick={handleLogOut}>Log Out</button>
+				<button className="newProject" onClick={handleNewProject}>New Project</button>
+				{errorMessage && <p className="error-message">{errorMessage}</p>}
+			</div>
 		</div>
 	);
 };

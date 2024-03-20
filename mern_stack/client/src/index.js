@@ -2,7 +2,7 @@
 
 // the main layout of the website
 
-import React from 'react';
+import React, {useHistory} from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/index.css';
 import './fonts.css'
@@ -13,6 +13,7 @@ import Projects from './Projects';
 import ErrorPage, {Error} from './ErrorPage';
 import Register from './Register'
 import {AuthProvider} from './AuthContext'
+import ProjectPage from './ProjectPage.js'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -30,7 +31,11 @@ const router = createBrowserRouter([
 			},
 			{
 				path: '/projects',
-				element: <Projects />
+				element: <Projects/>,
+			},
+			{
+				path: '/projects/:projectName',
+				element: <ProjectPage/>,
 			},
 			{
 				path: '/register',
@@ -49,5 +54,5 @@ root.render(
 		<AuthProvider>
 			<RouterProvider router={router} />
 		</AuthProvider>
-  </React.StrictMode>
+	</React.StrictMode>
 );

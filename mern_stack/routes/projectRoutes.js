@@ -11,12 +11,14 @@ module.exports = function(app) {
 	// handles new projects
 	app.post('/newProject', async (req, res) => {
 		const { username, title, description } = req.body;
-		console.log("creating new project under"+username, title, description);
+		const projectCount = await Project.countDocuments();
+		const titleCount = title+projectCount;
+		console.log("creating new project under "+username, titleCount, description);
 		const user = await User.findOne({username: username});
 		try {
 			let project = new Project({
-				title,
-				description
+				title: titleCount,
+				description: description
 			});
 			
 			await project.save();
@@ -53,5 +55,38 @@ module.exports = function(app) {
 			console.error('Error fetching projects:', err);
 			res.status(500).json({msg: 'Failed to fetch projects' });
 		}
+	});
+
+	// handles getting a project's data
+	app.get('/checkAccess', async (req, res) => {
+		console.log("CHECKING ACCESS");
+		const username = req.query.username;
+		const title = req.query.title;
+		console.log(username, title);
+
+		const user = await User.findOne({username: username});
+		const project = await Project.findOne({title: title});
+		if (!user || !project)
+		{
+			return;
+		}
+		const userId = user._id;
+		const projectId = project._id;
+		console.log("userId "+userId, "projectId "+projectId);
+		
+		const association = await Association.findOne({user: userId, project: projectId});
+		console.log(association);
+
+		res.status(200).json({association});
+	});
+
+	// handles getting a project's data
+	app.get('/getProjectData', async (req, res) => {
+		const title = req.query.title;
+		console.log("getting project "+title);
+
+		// find our user
+		const project = await Project.findOne({title: title});
+		res.status(200).json({ project });
 	});
 }
