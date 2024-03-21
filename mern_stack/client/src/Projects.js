@@ -55,14 +55,6 @@ export default function Projects(){
 						onChange={(e) => setDescription(e.target.value)}
 						required
 					/>
-					{/* <input
-						className="description"
-						type="text"
-						placeholder="Enter Description"
-						value={description}
-						onChange={(e) => setDescription(e.target.value)}
-						required
-					/> */}
 					<button type="submit" className="submit-project">Submit</button>
 				</form>
 			</div>
