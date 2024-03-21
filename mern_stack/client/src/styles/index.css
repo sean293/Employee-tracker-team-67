@@ -40,6 +40,32 @@ input {
 
 }
 
+textarea {
+	box-sizing: border-box;
+
+	font-family: 'Work Sans';
+	font-size: 20px;
+	font-weight: 500;
+
+	width: 100%;
+
+	padding: 8px;
+	margin-bottom: 8px;
+	/* margin-bottom: 8px; */
+	
+	display: flex;
+	/* justify-content: space-between; */
+
+	border-width: 0px;
+	border-radius: 4px;
+
+	background-color: #474b58;
+	color:rgb(255, 255, 255);
+
+	resize: none;
+
+}
+
 input:focus{
 	outline: none;
 }
@@ -48,7 +74,15 @@ button:hover {
 	background-color: #1d1f25;
 }
 
-button {
+form{
+	/* position: relative; */
+	width: 50%;
+	left: 25%;
+	position:absolute;
+	top: 35%;
+}
+
+button{
 	width: 100%;
 	font-family: 'Work Sans';
 	font-size: 16px;
@@ -94,6 +128,9 @@ h2{
 	font-weight: 500;
 
 	color: white;
+
+	padding: 0;
+	margin: 0;
 }
 
 .navbar-text{
@@ -135,6 +172,7 @@ h2{
 .content{
 	margin-top: 100px;
 	height: calc(100vh - 100px);
+	position: relative;
 }
 
 #projects {

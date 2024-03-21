@@ -9,7 +9,7 @@
 	/* background: rgba(0, 0, 255, 0.278); */
 }
 
-#register-button {
+.register {
 	position: absolute;
 	left: 0px;
 	margin-left: 100%;

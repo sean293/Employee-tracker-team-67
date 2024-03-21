@@ -13,28 +13,12 @@ import './styles/index.css'
 export default function Login(){
 	const navigate = useNavigate();
 
-	const [formData, setFormData] = useState({
-		username: '',
-		password: ''
-	});
-
-	const {username, password} = formData;
-	const [errorMessage, setErrorMessage] = useState('');
-
-	const handleChange = (e) => {
-		setFormData({...formData, [e.target.name]: e.target.value});
-	};
+	const [username, setUsername] = useState([]);
+	const [password, setPassword] = useState([]);
 
 	const {login} = useAuth();
-	const handleLogin = async (e) => {
-		
-		e.preventDefault();
-
-		if (!username || !password){
-			setErrorMessage('Please fill in all fields.');
-			return;
-		}
-
+	
+	const handleLogin = async (username, password) => {
 		try {
 			const res = await axios.post('http://localhost:5000/login', {
 				username,
@@ -43,7 +27,7 @@ export default function Login(){
 			login(username);
 			navigate('/projects');
 		} catch (err) {
-			setErrorMessage("ERROR: ");
+			console.log(err);
 		}
 	};
 
@@ -51,15 +35,33 @@ export default function Login(){
 		navigate('/register');
 	};
 
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		handleLogin(username, password);
+	};
+
 	return (
 		<div>
-			<div className="login-form">
-				<input type="text" placeholder="Username" name="username" value={username} onChange={handleChange} required/>
-				<input type="password" placeholder="Password" name="password" value={password} onChange={handleChange} required/>
-				<button id="login-button" onClick={handleLogin} type="submit">Login</button>
-				<button id="register-button" onClick={handleRegister} type="submit">Register</button>
-			</div>
-			{errorMessage && <p type="message">{errorMessage}</p>}
+			<form onSubmit={handleSubmit} >
+				<input
+					className="username"
+					type="text"
+					placeholder="Username or Email"
+					value={username}
+					onChange={(e) => setUsername(e.target.value)}
+					required
+				/>
+				<input
+					className="password"
+					type="password"
+					placeholder="Password"
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
+					required
+				/>
+				<button type="submit" className="submit">Submit</button>
+				<button type="submit" className="register" onClick={handleRegister}>Register</button>
+			</form>
 		</div>
 	);
 };

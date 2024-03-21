@@ -12,13 +12,13 @@ module.exports = function(app) {
 	// handles new projects
 	app.post('/newProject', async (req, res) => {
 		const { username, title, description } = req.body;
-		const projectCount = await Project.countDocuments();
-		const titleCount = title+projectCount;
-		console.log("creating new project under "+username, titleCount, description);
+		// const projectCount = await Project.countDocuments();
+		// const titleCount = title+projectCount;
+		console.log("creating new project under "+username, title, description);
 		const user = await User.findOne({username: username});
 		try {
 			let project = new Project({
-				title: titleCount,
+				title: title,
 				description: description
 			});
 			
