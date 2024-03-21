@@ -28,18 +28,22 @@ const router = createBrowserRouter([
 			{
 				path: '/login',
 				element: <Login />,
+				errorElement: <ErrorPage />, // this is where we are sent if a page that doesn't exist is reached
 			},
 			{
 				path: '/projects',
 				element: <Projects/>,
+				errorElement: <ErrorPage />, // this is where we are sent if a page that doesn't exist is reached
 			},
 			{
 				path: '/projects/:projectName',
 				element: <ProjectPage/>,
+				errorElement: <ErrorPage />, // this is where we are sent if a page that doesn't exist is reached
 			},
 			{
 				path: '/register',
 				element: <Register />,
+				errorElement: <ErrorPage />, // this is where we are sent if a page that doesn't exist is reached
 			},
 			{
 				path: '/error',

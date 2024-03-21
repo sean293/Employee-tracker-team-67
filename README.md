@@ -5,7 +5,7 @@ Go to the main project and click the `Fork` button in the top right to create a 
 
 Create a local copy using `git clone [link to your repo]` while in the target directory.
 
-To make changes to your local clone, first use `gid add .` to add all files.
+To make changes to your local clone, first use `git add .` to add all files.
 Then use `git commit -m "[message]"` to commit with a message.
 Finally use `git push` to upload the changes to the repository.
 
@@ -16,7 +16,7 @@ Install [node.js](https://nodejs.org/en) and [MongoDB](https://www.mongodb.com/t
 
 Open MongoDB Compass and make a new connetion to `mongodb://localhost:27017` (should be the default).
 
-While in the `/mern_stack` and `/mern_stack/client` directories run `npm install` to get all needed dependencies from the `package.json` files.
+While in the `/mern_stack/client` directories run `npm install` to get all needed dependencies from the `package.json` files.
 
 To start the backend run `node server.js` when in the `/mern_stack` directory.  Leave this terminal open.
 

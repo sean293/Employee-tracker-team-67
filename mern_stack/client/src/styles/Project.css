@@ -127,6 +127,8 @@
 .scroll-container {
 	overflow-y: auto;
 	overflow-x: hidden;
+	word-wrap: break-word;
+	hyphens: auto;
 
 	max-height:calc(100% - 130px);
 
