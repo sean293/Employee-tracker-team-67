@@ -25,3 +25,5 @@ To start the frontend run `npm start` when in the `/mern_stack/client` directory
 It should then open `http://localhost:3000/` in a web browser.
 
 To view accounts added to the database using the `/register` page, open the `users` collection under the `Team67` database in MongoDB Compass.
+
+Let's see how this goes
