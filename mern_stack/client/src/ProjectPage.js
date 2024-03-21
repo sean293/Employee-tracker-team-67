@@ -14,6 +14,31 @@ const ProjectPage = () => {
 	const {user} = useAuth();
 	const [isAuth, setIsAuth] = useState(false);
 
+	const handleClockIn = async () => {
+		try {
+			const response = await axios.post('http://localhost:5000/clockUserIn', {
+				title: projectName,
+				username: user,
+			});
+			console.log("user clocked in",response);
+
+		} catch (err) {
+			console.log("WHOOPS!");
+		}
+	};
+
+	const handleClockOut = async () => {
+		try {
+			const response = await axios.post('http://localhost:5000/clockUserOut', {
+				username: user,
+				title: projectName,
+			});
+			console.log("user clocked out",response);
+		} catch (err) {
+			console.log("WHOOPS!");
+		}
+	};
+
 	useEffect(() => {
 		const checkAccess = async () => {
 			try {
@@ -70,9 +95,15 @@ const ProjectPage = () => {
 	}, [isAuth]);
 
 	return (
-		<div className="project-background">
-			<h1 className="project-title">{project.title}</h1>
-			<h2 className="project-description">{project.description}</h2>
+		<div className='content'>
+			<button className="clock-in" onClick={handleClockIn}>Clock In</button>
+			<button className="clock-out" onClick={handleClockOut}>Clock Out</button>
+			<div className="project-background">
+				<h1 className="project-title">{project.title}</h1>
+				<div className='scroll-container'>
+					<p className="project-description">{project.description}</p>
+				</div>
+			</div>
 		</div>
 	);
 };

@@ -1,7 +1,9 @@
 .project-grid{
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(auto-fill, minmax(calc(33.33vw - 20px), 1fr));
+	position:sticky;
 	height: 90%;
+	gap: 10px;
 }
 
 .project-grid-item{
@@ -9,7 +11,7 @@
 	background-color: #474b58;
 	text-align: center;
 
-	margin: 10px;
+	/* margin: 10px; */
 
 	justify-content: center;
 	align-items: center;
@@ -40,42 +42,34 @@
 	background-color: #474b58;
 	border-radius: 15px;
 
-	width: 100%;
+	width: 50%;
 	height: 100%;
+
+	position: relative;
+
+	overflow: hidden;
 
 }
 
 .project-title {
-	display: inline-block;
-	position: relative;
-	left: 5%;
-	top: 5%;
-	transform: translate(0%, -50%);
+	display: block;
+	padding-left: 5%;
+	padding-top: 5%;
+	text-decoration:underline;
+	font-weight: 600;
+	font-size: 48px;
 }
 
 .project-description {
-	display: inline-block;
-	position: relative;
-	left:5%;
-	top: 5%;
-	transform: translate(0%, -50%);
+	display: block;
+	font-size: 24px;
+	margin: 0;
+	padding: 0;
 }
 
 .button-bar {
 	height: 10%;
 	width: 100%;
-}
-	
-.logout{
-}
-
-.addUser{
-}
-
-.addProject{
-}
-
-.newProject{
 }
 
 .error-message{
@@ -88,4 +82,61 @@
 	left: 50%;
 
 	font-size: 20px;
+}
+
+.clock-in{
+	background-color: green;
+	position: absolute;
+	left: 50%;
+	width: 50%;
+	height: 50%;
+	font-size: 48px;
+	font-weight: 700;
+	border-radius: 25px;
+
+	box-sizing: border-box;
+	padding: 5px;
+}
+.clock-out{
+	border-radius: 25px;
+	background-color: darkred;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 50%;
+	height: 50%;
+	font-size: 48px;
+	font-weight: 700;
+}
+
+.submit-project{
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0%);
+}
+
+.form-background{
+	position:absolute;
+	background-color: rgba(0, 0, 0, 0.70);
+	width:100%;
+	height:100%;
+	top:0;
+	left:0;
+}
+
+.scroll-container {
+	overflow-y: auto;
+	overflow-x: hidden;
+
+	max-height:calc(100% - 130px);
+
+	scrollbar-color: #1d1f25 transparent;
+	margin:0;
+	margin-right: 10px;
+	margin-top: 5px;
+
+	padding-left: 5%;
+	padding-right: 5%;
+	
+	line-height: 1.5;
 }

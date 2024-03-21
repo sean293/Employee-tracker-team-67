@@ -12,30 +12,11 @@ import './styles/index.css'
 export default function Register(){
 	const navigate = useNavigate();
 
-	const [formData, setFormData] = useState({
-		username: '',
-		email: '',
-		password: ''
-	});
+	const [username, setUsername] = useState([]);
+	const [password, setPassword] = useState([]);
+	const [email, setEmail] = useState([]);
 
-	// stores the data from the input boxes on the frontend
-	const {username, email, password} = formData;
-
-	const [errorMessage, setErrorMessage] = useState('');
-
-	const handleChange = (e) => {
-		setFormData({...formData, [e.target.name]: e.target.value});
-	};
-
-	const handleRegister = async (e) => {
-
-		// verify login info
-		e.preventDefault();
-
-		if (!username || !email || !password){
-			setErrorMessage('Please fill in all fields.');
-			return;
-		}
+	const handleRegister = async (username, email, password) => {
 
 		try {
 			// backend call that makes the new user
@@ -45,26 +26,46 @@ export default function Register(){
 				password
 			});
 
-			setErrorMessage('User Created');
-
-			// redirect to login after 1 second
-			setTimeout(() => {
-					navigate('/login');
-			}, 1000);
+			navigate('/login');
 		} catch (err) {
-			setErrorMessage("ERROR: "+err.response.data.msg);
+			console.log(err);
 		}
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		handleRegister(username, email, password);
 	};
 
 	return (
 		<div>
-			<div className="login-form">
-				<input type="text" placeholder="Username" name="username" value={username} onChange={handleChange} required/>
-				<input type="email" placeholder="Email" name="email" value={email} onChange={handleChange} required/>
-				<input type="password" placeholder="Password" name="password" value={password} onChange={handleChange} required/>
-				<button id="login-button" onClick={handleRegister} type="submit">Submit</button>
-			</div>
-			{errorMessage && <p type="message">{errorMessage}</p>}
+			<form onSubmit={handleSubmit} >
+				<input
+					className="username"
+					type="text"
+					placeholder="Username"
+					value={username}
+					onChange={(e) => setUsername(e.target.value)}
+					required
+				/>
+				<input
+					className="email"
+					type="text"
+					placeholder="Email"
+					value={email}
+					onChange={(e) => setEmail(e.target.value)}
+					required
+				/>
+				<input
+					className="password"
+					type="password"
+					placeholder="Password"
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
+					required
+				/>
+				<button type="submit" className="submit">Submit</button>
+			</form>
 		</div>
 	);
 }
