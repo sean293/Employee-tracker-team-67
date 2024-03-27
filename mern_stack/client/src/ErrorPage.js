@@ -11,8 +11,8 @@ export function Error() {
 	console.log("error page loaded");
 
 	return (
-		<div id="error-page">
-			<p>Page not found.</p>
+		<div>
+			<p className="error-page">Page not found.</p>
 		</div>
 	);
 };

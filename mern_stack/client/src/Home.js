@@ -31,7 +31,7 @@ const Home = () => {
 			<div className="navigation">
 				<h1 className="navbar-text" id="back" onClick={handleBack}>&larr;</h1>
 				<h1 className="navbar-text" id="home" onClick={handleHome}>Team 67</h1>
-				<h1 className="navbar-text" id="login" onClick={user ? handleProjects : handleLogin}>{user ? user : "Login"}</h1>
+				<h1 className="navbar-text" id="login" onClick={user ? handleProjects : handleLogin}>{user ? user.username : "Login"}</h1>
 			</div>
 			<div className="content">
 				<Outlet/>

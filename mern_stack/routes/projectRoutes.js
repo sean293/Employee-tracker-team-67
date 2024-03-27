@@ -19,6 +19,7 @@ module.exports = function(app) {
 		try {
 			let project = new Project({
 				title: title,
+				manager: user,
 				description: description
 			});
 			
@@ -42,16 +43,28 @@ module.exports = function(app) {
 	app.get('/getProject', async (req, res) => {
 		const userId = req.query.username;
 		console.log("getting projects from "+userId);
-
+		
 		// find our user
 		const user = await User.findOne({username: userId});
-
+		
 		try {
 			// find all associations with user
 			const associations = await Association.find({ user: user }).populate('project');
 			// compose list of projects based on associations
 			const projects = associations.map(association => association.project);
-			res.status(200).json({ success: true, projects });
+			res.status(200).json({ projects });
+		} catch (err) {
+			console.error('Error fetching projects:', err);
+			res.status(500).json({msg: 'Failed to fetch projects' });
+		}
+	});
+	
+	// handles getting all projects
+	app.get('/getAllProject', async (req, res) => {
+		try {
+			console.log("getting all projects");
+			const projects = await Project.find();
+			res.status(200).json({ projects });
 		} catch (err) {
 			console.error('Error fetching projects:', err);
 			res.status(500).json({msg: 'Failed to fetch projects' });

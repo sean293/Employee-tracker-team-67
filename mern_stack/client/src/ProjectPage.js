@@ -18,7 +18,7 @@ const ProjectPage = () => {
 		try {
 			const response = await axios.post('http://localhost:5000/clockUserIn', {
 				title: projectName,
-				username: user,
+				username: user.username,
 			});
 			console.log("user clocked in",response);
 
@@ -30,7 +30,7 @@ const ProjectPage = () => {
 	const handleClockOut = async () => {
 		try {
 			const response = await axios.post('http://localhost:5000/clockUserOut', {
-				username: user,
+				username: user.username,
 				title: projectName,
 			});
 			console.log("user clocked out",response);
@@ -41,19 +41,26 @@ const ProjectPage = () => {
 
 	useEffect(() => {
 		const checkAccess = async () => {
+			const title = projectName;
 			try {
-				const title = projectName;
-				const res = await axios.get('http://localhost:5000/checkAccess', {
-					params: {
-						username: user,
-						title: title
-					}
-				});
-				if (!res.data.association)
+				if (!user)
 				{
-					console.log("user didn't have access to project");
 					navigate('/error');
 					return;
+				}
+				if (user.role !== 'Administrator') {
+					const res = await axios.get('http://localhost:5000/checkAccess', {
+						params: {
+							username: user.username,
+							title: title
+						}
+					});
+					if (!res.data.association)
+					{
+						console.log("user didn't have access to project");
+						navigate('/error');
+						return;
+					}
 				}
 
 				setIsAuth(true);

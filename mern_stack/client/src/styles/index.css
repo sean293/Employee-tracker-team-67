@@ -40,7 +40,7 @@ input {
 
 }
 
-textarea {
+select {
 	box-sizing: border-box;
 
 	font-family: 'Work Sans';
@@ -61,9 +61,47 @@ textarea {
 
 	background-color: #474b58;
 	color:rgb(255, 255, 255);
+}
+
+.select-user option {
+	font-family: 'Work Sans';
+	font-size: 20px;
+	font-weight: 500;
+	
+}
+
+.select-user:focus{
+	border:none;
+	outline:none;
+}
+
+
+textarea {
+	box-sizing: border-box;
+
+	font-family: 'Work Sans';
+	font-size: 20px;
+	font-weight: 500;
+
+	width: 100%;
+
+	padding: 8px;
+	margin-bottom: 8px;
+	
+	display: flex;
+
+	border-width: 0px;
+	border-radius: 4px;
+
+	background-color: #474b58;
+	color:rgb(255, 255, 255);
 
 	resize: none;
 
+}
+
+textarea:focus {
+	outline:none;
 }
 
 input:focus{
@@ -75,7 +113,6 @@ button:hover {
 }
 
 form{
-	/* position: relative; */
 	width: 50%;
 	left: 25%;
 	position:absolute;
@@ -179,4 +216,13 @@ h2{
 	position: absolute;
 	font-size: 20px;
 	left: 10%;
+}
+
+.error-page {
+	padding:0;
+	margin:0;
+	position:absolute;
+	transform: translate(-50%, -50%);
+	left:50%;
+	top: 50%;
 }

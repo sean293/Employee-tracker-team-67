@@ -6,6 +6,8 @@ import {useNavigate} from 'react-router-dom';
 import React, {useState, useEffect} from 'react';
 import {useAuth} from './AuthContext';
 import axios from 'axios';
+import NewProjectForm from './NewProjectForm'
+import NewUserForm from './NewUserForm'
 
 import './styles/Project.css'
 
@@ -13,72 +15,40 @@ export default function Projects(){
 	const navigate = useNavigate();
 	const {user, logout} = useAuth();
 	const [projects, setProjects] = useState([]);
-	const [errorMessage, setErrorMessage] = useState('');
-	const [showForm, setShowForm] = useState(false);
+	const [users, setUsers] = useState([]);
+	const [showFormProject, setShowFormProject] = useState(false);
+	const [showFormUser, setShowFormUser] = useState(false);
 
-	function ProjectForm({handleNewProject}) {
-		const [title, setTitle] = useState('');
-		const [description, setDescription] = useState('');
-	
-		const handleSubmit = (e) => {
-			e.preventDefault();
-			handleNewProject(title, description);
-			setTitle('');
-			setDescription('');
-		};
-	
-		const handleBackgroundClick = (e) => {
-			// Close the form if background is clicked
-			if (e.target === e.currentTarget)
-			{
-				setShowForm(false);
-			}
-		};
-	
-	
-		return (
-			<div className='form-background' onClick={handleBackgroundClick}>
-				<form onSubmit={handleSubmit} >
-					<input
-						className="title"
-						type="text"
-						placeholder="Enter Title"
-						value={title}
-						onChange={(e) => setTitle(e.target.value)}
-						required
-					/>
-					<textarea rows='5' cols='50'
-						className="description"
-						type="text"
-						placeholder="Enter Description"
-						value={description}
-						onChange={(e) => setDescription(e.target.value)}
-						required
-					/>
-					<button type="submit" className="submit-project">Submit</button>
-				</form>
-			</div>
-		)
-	};
-
-	const handleNewProject = async (title, description) => {
+	const handleNewProject = async (title, username, description) => {
 
 		// verify login info
 		// e.preventDefault();
 
 		try {
 			const res = await axios.post('http://localhost:5000/newProject', {
-				username: user,
+				username: username,
 				title: title,
 				description: description
 			});
-			setErrorMessage("NEW PROJECT CREATED: "+title);
 			setProjects(res.data.projects);
+			setShowFormProject(false);
 		} catch (err) {
-			setErrorMessage("ERROR: "+err);
 		}
 
 		fetchProjects();
+	};
+
+	const handleNewUser = async (username, email, password) => {
+
+		try {
+			const res = await axios.post('http://localhost:5000/register', {
+				username,
+				email,
+				password
+			});
+			setShowFormUser(false);
+		} catch (err) {
+		}
 	};
 
 	const handleLogOut = () => {
@@ -92,6 +62,21 @@ export default function Projects(){
 		navigate(`/projects/${project.title}`);
 	};
 
+	const fetchUsers = async () => {
+		try {
+			if (user.role!='Administrator')	{
+				return;
+			}
+			const response = await axios.get('http://localhost:5000/getAllUser');
+
+			// populate users
+			setUsers(response.data.users);
+			console.log("users found:",response.data.users);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 	
 
 	const fetchProjects = async () => {
@@ -102,31 +87,35 @@ export default function Projects(){
 			return;
 		}
 
+		var response = null;
 		try {
-			const response = await axios.get('http://localhost:5000/getProject', {
-				params: {
-					username: user
-				}
-			});
-
-			if (!response.data.success) {
-				setErrorMessage('Failed to fetch projects');
-			}
-			else
-			{
-				setErrorMessage("user "+user);
+			if (user.role==='Administrator')	{
+				response = await axios.get('http://localhost:5000/getAllProject');
+				console.log(response);
+			} else {
+				response = await axios.get('http://localhost:5000/getProject', {
+					params: {
+						username: user.username
+					}
+				});
 			}
 
 			// populate projects
 			setProjects(response.data.projects);
 			console.log("projects found:",response.data.projects);
 		} catch (err) {
-			setErrorMessage('Error fetching projects:', err);
+			console.log(err);
 		}
 	};
 
 	useEffect(() => {
+		if (!user)
+		{
+			navigate('/error');
+			return;
+		}
 		fetchProjects();
+		fetchUsers();
 	}, []); // empty array ensures this effect runs only once
 
 	return (
@@ -143,10 +132,11 @@ export default function Projects(){
 			</div>
 			<div className="button-bar">
 				<button className="logout" onClick={handleLogOut}>Log Out</button>
-				{errorMessage && <p className="error-message">{errorMessage}</p>}
-				<button className="newProject" onClick={() => setShowForm(true)}>New Project</button>
-				{showForm && <ProjectForm handleNewProject={handleNewProject} />}
+				{user && (user.role=='Manager'||user.role=='Administrator') && <button className="new-project" onClick={() => setShowFormProject(true)}>New Project</button>}
+				{user && user.role=='Administrator' && <button className="new-user" onClick={() => setShowFormUser(true)}>New User</button>}
 			</div>
+			{showFormProject && <NewProjectForm handleNewProject={handleNewProject} setShowForm={setShowFormProject} users={users} />}
+			{showFormUser && <NewUserForm handleNewUser={handleNewUser} setShowForm={setShowFormUser}/>}
 		</div>
 	);
 };

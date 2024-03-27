@@ -51,13 +51,24 @@ module.exports = function(app) {
 			}
 
 			// if we want to use jwt tokens
-			const token = jwt.sign({userId: user._id}, 'your_secret_key', {expiresIn: '1h'});
-			res.json({token});
-			console.log(token);
+			// const token = jwt.sign({userId: user._id}, 'your_secret_key', {expiresIn: '1h'});
+			res.json({user});
 			
 		} catch (err) {
 			console.error('Error registering user:', err);
 			res.status(500).json({msg: "Server Error"});
+		}
+	});
+
+	// handles getting all users
+	app.get('/getAllUser', async (req, res) => {
+		try {
+			console.log("getting all users");
+			const users = await User.find();
+			res.status(200).json({ users });
+		} catch (err) {
+			console.error('Error fetching users:', err);
+			res.status(500).json({msg: 'Failed to fetch users' });
 		}
 	});
 }
