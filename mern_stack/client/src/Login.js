@@ -3,8 +3,7 @@
 // login page that queries database
 
 import {useNavigate} from 'react-router-dom';
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import {useAuth} from './AuthContext'
 
 import './styles/Login.css';
@@ -16,20 +15,21 @@ export default function Login(){
 	const [username, setUsername] = useState([]);
 	const [password, setPassword] = useState([]);
 
-	const {login} = useAuth();
+	const {user, login} = useAuth();
 	
 	const handleLogin = async (username, password) => {
 		try {
-			const res = await axios.post('http://localhost:5000/login', {
-				username,
-				password
-			});
-			login(username);
-			navigate('/projects');
+			const res=await login(username, password);
 		} catch (err) {
 			console.log(err);
 		}
 	};
+
+	useEffect(() => {
+		if (user) {
+			navigate('/projects');
+		}
+	}, [user]);
 
 	const handleRegister = async () => {
 		navigate('/register');
@@ -60,7 +60,6 @@ export default function Login(){
 					required
 				/>
 				<button type="submit" className="submit">Submit</button>
-				<button type="submit" className="register" onClick={handleRegister}>Register</button>
 			</form>
 		</div>
 	);

@@ -26,6 +26,11 @@ const userSchema = new mongoose.Schema({
 		ref: 'ClockInOut',
 		default: null
 	},
+	role: {
+		type: String,
+		enum: ['Employee', 'Manager', 'Administrator'],
+		default: 'Employee'
+	}
 });
 
 module.exports = mongoose.model('User', userSchema);
