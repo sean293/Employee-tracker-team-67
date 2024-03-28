@@ -135,7 +135,7 @@ export default function Projects(){
 				{user && (user.role=='Manager'||user.role=='Administrator') && <button className="new-project" onClick={() => setShowFormProject(true)}>New Project</button>}
 				{user && user.role=='Administrator' && <button className="new-user" onClick={() => setShowFormUser(true)}>New User</button>}
 			</div>
-			{showFormProject && <NewProjectForm handleNewProject={handleNewProject} setShowForm={setShowFormProject} users={users} />}
+			{showFormProject && fetchUsers() && <NewProjectForm handleNewProject={handleNewProject} setShowForm={setShowFormProject} users={users} />}
 			{showFormUser && <NewUserForm handleNewUser={handleNewUser} setShowForm={setShowFormUser}/>}
 		</div>
 	);

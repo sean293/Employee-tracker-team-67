@@ -6,6 +6,7 @@ import {useNavigate, useParams} from 'react-router-dom';
 import React, {useState, useEffect} from 'react';
 import {useAuth} from './AuthContext';
 import axios from 'axios';
+import EditProjectForm from './EditProjectForm'
 
 const ProjectPage = () => {
 	const navigate = useNavigate();
@@ -13,6 +14,7 @@ const ProjectPage = () => {
 	const [project, setProject] = useState([]);
 	const {user} = useAuth();
 	const [isAuth, setIsAuth] = useState(false);
+	const [showFormSettings, setShowFormSettings] = useState(false);
 
 	const handleClockIn = async () => {
 		try {
@@ -107,10 +109,12 @@ const ProjectPage = () => {
 			<button className="clock-out" onClick={handleClockOut}>Clock Out</button>
 			<div className="project-background">
 				<h1 className="project-title">{project.title}</h1>
+				<button className="settings" onClick={() => setShowFormSettings(true)}>⚙️</button>
 				<div className='scroll-container'>
 					<p className="project-description">{project.description}</p>
 				</div>
 			</div>
+			{(user.role==="Administrator" || project.manager===user._id) && showFormSettings && <EditProjectForm project={project} setShowForm={setShowFormSettings}/>}
 		</div>
 	);
 };
