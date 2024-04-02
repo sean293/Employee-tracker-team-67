@@ -2,6 +2,7 @@
 
 // controls user requests such as login and registration
 
+const bcrypt = require('bcrypt');
 const User = require('../client/models/User');
 
 module.exports = function(app) {
@@ -9,7 +10,10 @@ module.exports = function(app) {
 	// handles registration
 	app.post('/register', async (req, res) => {
 		const {username, email, password} = req.body;
-		console.log("registering user "+username);
+		console.log("registering user "+ username);
+		console.log(password);
+		console.log(await bcrypt.hash(password, 10));
+		console.log("hello")
 		try {
 			
 			// find user
@@ -19,11 +23,15 @@ module.exports = function(app) {
 				return res.status(400).json({msg: 'User already exists'});
 			}
 
+			// Hash password
+			const hashedPassword = await bcrypt.hash(password, 10);
+			console.log(hashedPassword);
+
 			// create our new user
 			user = new User({
 				username,
 				email,
-				password
+				password: hashedPassword
 			});
 			
 			await user.save();
@@ -46,7 +54,11 @@ module.exports = function(app) {
 			if (!user) {
 				return res.status(401).json({msg: 'Invalid credidentials.'});
 			}
-			if (password != user.password) {
+
+			// compare hashed password with provided password
+			const passwordMatch = await bcrypt.compare(password, user.password);
+
+			if (!passwordMatch) { // Change to password != user.password before running server.js to login w/ plaintext
 				return res.status(401).json({msg: 'Invalid credidentials.'});
 			}
 
