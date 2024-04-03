@@ -5,12 +5,14 @@
 import React, {useState, useEffect} from 'react';
 import CheckboxDropdown from './CheckboxDropdown';
 import axios from 'axios';
+import {useNavigate, useParams} from 'react-router-dom';
 
 export default function EditProjectForm({project, setShowForm}) {
 	const [title, setTitle] = useState('');
 	const [users, setUsers] = useState([]);
 	const [projectUsers, setProjectUsers] = useState([]);
 	const [description, setDescription] = useState('');
+	const navigate = useNavigate();
 
 
 	const handleSubmit = async (e) => {
@@ -28,6 +30,9 @@ export default function EditProjectForm({project, setShowForm}) {
 		} catch(err) {
 			console.log(err);
 		}
+		setShowForm(false);
+		navigate(`/projects/${title}`);
+		window.location.reload();
 	};
 
 	const handleBackgroundClick = (e) => {

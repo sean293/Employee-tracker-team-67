@@ -75,31 +75,33 @@ const ProjectPage = () => {
 		checkAccess();
 	}, []); // empty array ensures this effect runs only once
 
+	const fetchProjectData = async () => {
+
+		console.log("fetching data!");
+		if (!isAuth)
+		{
+			console.log("NOT AUTHORIZED");
+			return;
+		}
+		// check if user has association to project
+		try {
+			console.log("trying to get project data");
+			const response = await axios.get('http://localhost:5000/getProjectData', {
+				params: {
+					title: projectName
+				}
+			});
+			// populate project
+			setProject(response.data.project);
+			console.log("response data:",response.data.project);
+
+		} catch (err) {
+			console.log("WHOOPS!");
+		}
+	};
+
 	useEffect(() => {
-		const fetchProjectData = async () => {
-
-			console.log("fetching data!");
-			if (!isAuth)
-			{
-				console.log("NOT AUTHORIZED");
-				return;
-			}
-			// check if user has association to project
-			try {
-				console.log("trying to get project data");
-				const response = await axios.get('http://localhost:5000/getProjectData', {
-					params: {
-						title: projectName
-					}
-				});
-				// populate project
-				setProject(response.data.project);
-				console.log("response data:",response.data.project);
-
-			} catch (err) {
-				console.log("WHOOPS!");
-			}
-		};
+		
 		fetchProjectData();
 	}, [isAuth]);
 
@@ -107,13 +109,13 @@ const ProjectPage = () => {
 		<div className='content'>
 			<button className="clock-in" onClick={handleClockIn}>Clock In</button>
 			<button className="clock-out" onClick={handleClockOut}>Clock Out</button>
-			<div className="project-background">
+			{project && <div className="project-background">
 				<h1 className="project-title">{project.title}</h1>
 				<button className="settings" onClick={() => setShowFormSettings(true)}>⚙️</button>
 				<div className='scroll-container'>
 					<p className="project-description">{project.description}</p>
 				</div>
-			</div>
+			</div>}
 			{(user.role==="Administrator" || project.manager===user._id) && showFormSettings && <EditProjectForm project={project} setShowForm={setShowFormSettings}/>}
 		</div>
 	);
