@@ -51,10 +51,8 @@ select {
 
 	padding: 8px;
 	margin-bottom: 8px;
-	/* margin-bottom: 8px; */
 	
 	display: flex;
-	/* justify-content: space-between; */
 
 	border-width: 0px;
 	border-radius: 4px;

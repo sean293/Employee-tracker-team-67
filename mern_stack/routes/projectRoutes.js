@@ -39,6 +39,39 @@ module.exports = function(app) {
 		}
 	});
 
+	// handles editing projects
+	app.post('/editProject', async (req, res) => {
+		console.log("EDITING PROJECT");
+		const { usernames, title, description, project } = req.body;
+		console.log(usernames);
+		const updatedFields = { title: title, description: description };
+		const projectId = project._id;
+		console.log("PROJECT ID:",projectId);
+		try {
+			// change title and description
+			const project = await Project.findByIdAndUpdate(projectId, updatedFields, { new: true });
+			console.log("PROJECT:",project);
+			
+			// to change users we must delete all associations and reassociate
+			await Association.deleteMany({ project: projectId });
+			
+			const users = await User.find({ username: { $in: usernames } });
+			const userIds = users.map(user => user._id);
+			console.log("USERIDS:",userIds);
+
+			const associations=[];
+			for (const userId of userIds) {
+				const association = await Association.create({ user: userId, project: projectId });
+				associations.push(association);
+			  }
+
+			return res.status(200).json({ project });
+		  } catch (err) {
+			console.error(err);
+			return res.status(500).json({ msg: 'Failed to update project' });
+		  }
+	});
+
 	// handles getting projects that user has access to
 	app.get('/getProject', async (req, res) => {
 		const userId = req.query.username;
@@ -58,6 +91,23 @@ module.exports = function(app) {
 			res.status(500).json({msg: 'Failed to fetch projects' });
 		}
 	});
+
+	// handles getting all users on a project
+	app.get('/getProjectUsers', async (req, res) => {
+		const project = req.query.project;
+		console.log("getting users from "+project.title);
+		
+		try {
+			// find all associations with project
+			const associations = await Association.find({ project: project });
+			const userIds = associations.map(association => association.user);
+			const users = await User.find({ _id: { $in: userIds } });
+			const usernames = users.map(users => users.username);
+			return res.status(200).json({ usernames });
+		} catch (err) {
+			res.status(500).json({msg: 'Failed to fetch projects' });
+		}
+	});
 	
 	// handles getting all projects
 	app.get('/getAllProject', async (req, res) => {
@@ -73,10 +123,10 @@ module.exports = function(app) {
 
 	// handles getting a project's data
 	app.get('/checkAccess', async (req, res) => {
-		console.log("CHECKING ACCESS");
+		// console.log("CHECKING ACCESS");
 		const username = req.query.username;
 		const title = req.query.title;
-		console.log(username, title);
+		// console.log(username, title);
 
 		const user = await User.findOne({username: username});
 		const project = await Project.findOne({title: title});
@@ -86,10 +136,10 @@ module.exports = function(app) {
 		}
 		const userId = user._id;
 		const projectId = project._id;
-		console.log("userId "+userId, "projectId "+projectId);
+		// console.log("userId "+userId, "projectId "+projectId);
 		
 		const association = await Association.findOne({user: userId, project: projectId});
-		console.log(association);
+		// console.log(association);
 
 		res.status(200).json({association});
 	});
