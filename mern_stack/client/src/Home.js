@@ -16,6 +16,9 @@ const Home = () => {
 	const handleHome = () => {
 		navigate('/')
 	}
+	const handleProfile = () => {
+		navigate('/profile')
+	}
 	const handleLogin = () => {
 		navigate('/login')
 	}
@@ -30,8 +33,8 @@ const Home = () => {
 		<div>
 			<div className="navigation">
 				<h1 className="navbar-text" id="back" onClick={handleBack}>&larr;</h1>
-				<h1 className="navbar-text" id="home" onClick={handleHome}>ClockIn Hub</h1>
-				<h1 className="navbar-text" id="login" onClick={user ? handleProjects : handleLogin}>{user ? user.username : "Login"}</h1>
+				<h1 className="navbar-text" id="home" onClick={handleProjects}>ClockIn Hub</h1>
+				<h1 className="navbar-text" id="login" onClick={user ? handleProfile : handleLogin}>{user ? user.username : "Login"}</h1>
 			</div>
 			<div className="content">
 				<Outlet/>

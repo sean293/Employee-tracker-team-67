@@ -15,6 +15,7 @@ import Register from './Register'
 import {AuthProvider} from './AuthContext'
 import ProjectPage from './ProjectPage.js'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import ProfilePage from './ProfilePage.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -33,6 +34,11 @@ const router = createBrowserRouter([
 			{
 				path: '/projects',
 				element: <Projects/>,
+				errorElement: <ErrorPage />, // this is where we are sent if a page that doesn't exist is reached
+			},
+			{
+				path: '/profile',
+				element: <ProfilePage/>,
 				errorElement: <ErrorPage />, // this is where we are sent if a page that doesn't exist is reached
 			},
 			{
