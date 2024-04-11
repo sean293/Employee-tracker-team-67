@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom/client';
 import './styles/index.css';
 import './fonts.css'
 
+import Report from './Report';
 import Home from './Home';
 import Login from './Login';
 import Projects from './Projects';
@@ -52,9 +53,17 @@ const router = createBrowserRouter([
 				errorElement: <ErrorPage />, // this is where we are sent if a page that doesn't exist is reached
 			},
 			{
+				path: '/reports',
+				element: <Report />,
+			},
+			{
+				path: '/reports/:selection',
+				element: <Report />,
+			},
+			{
 				path: '/error',
 				element: <Error />
-			}
+			},
 		]
 	},
 ]);

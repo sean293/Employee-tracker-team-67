@@ -41,6 +41,7 @@ export default function Projects(){
 	const handleNewUser = async (username, email, password) => {
 
 		try {
+			console.log("creating new user");
 			const res = await axios.post('http://localhost:5000/register', {
 				username,
 				email,
@@ -48,6 +49,7 @@ export default function Projects(){
 			});
 			setShowFormUser(false);
 		} catch (err) {
+			console.log(err);
 		}
 	};
 
@@ -135,7 +137,7 @@ export default function Projects(){
 				{user && (user.role=='Manager'||user.role=='Administrator') && <button className="new-project" onClick={() => setShowFormProject(true)}>New Project</button>}
 				{user && user.role=='Administrator' && <button className="new-user" onClick={() => setShowFormUser(true)}>New User</button>}
 			</div>
-			{showFormProject && fetchUsers() && <NewProjectForm handleNewProject={handleNewProject} setShowForm={setShowFormProject} users={users} />}
+			{showFormProject && users && <NewProjectForm handleNewProject={handleNewProject} setShowForm={setShowFormProject} users={users} />}
 			{showFormUser && <NewUserForm handleNewUser={handleNewUser} setShowForm={setShowFormUser}/>}
 		</div>
 	);

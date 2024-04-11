@@ -14,8 +14,10 @@ app.use(express.json());
 // import & use our routes for handling backend requests
 const userRoutes = require('./routes/userRoutes');
 const projectRoutes = require('./routes/projectRoutes');
+const reportRoutes = require('./routes/reportRoutes');
 userRoutes(app);
 projectRoutes(app);
+reportRoutes(app);
 
 
 // connect to MongoDB

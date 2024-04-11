@@ -228,3 +228,42 @@ h2{
     align-items: center; /* Center items horizontally */
     justify-content: center; /* Center items vertically */
 }
+
+table {
+	font-family: 'Work Sans';
+	font-size: 40px;
+	font-weight: 500;
+	color: white;
+
+	width: 100%;
+	text-align: center;
+
+	position:relative;
+}
+
+.table-row-data {
+	width: 100%;
+	font-family: 'Work Sans';
+	font-size: 32px;
+	font-weight: 400;
+
+	padding-top: 10px;
+	padding-bottom: 10px;
+
+	width: 100%;
+
+	border-width: 0px;
+	border-radius: 16px;
+
+	background-color: none;
+	color:rgb(255, 255, 255);
+
+	transition-duration: 0.2s;
+}
+
+.table-data-clickable {
+	cursor: pointer;
+}
+.table-data-clickable:hover {
+	color:lightblue;
+}

@@ -73,6 +73,8 @@ const ProjectPage = () => {
 			}
 		};
 		checkAccess();
+
+		console.log(projectName);
 	}, []); // empty array ensures this effect runs only once
 
 	const fetchProjectData = async () => {
