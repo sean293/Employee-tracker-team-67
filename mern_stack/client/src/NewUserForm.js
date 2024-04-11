@@ -15,6 +15,8 @@ export default function NewProjectForm({handleNewUser, setShowForm}) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
+		console.log("submitted");
+
 		handleNewUser(username, email, password);
 		setTitle('');
 		setDescription('');
