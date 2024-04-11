@@ -44,7 +44,7 @@ const Report = () => {
 		try {
 			const response = await axios.get('http://localhost:5000/getUsernames', {
 				params: {
-					userIds: userIds.join(',')
+					userIds: userIds
 				}
 			});
 			console.log("usernames",response.data);
@@ -58,7 +58,7 @@ const Report = () => {
 		try {
 			const response = await axios.get('http://localhost:5000/getProjectTitles', {
 				params: {
-					projectIds: projectIds.join(',')
+					projectIds: projectIds
 				}
 			});
 			console.log("titles",response.data);
