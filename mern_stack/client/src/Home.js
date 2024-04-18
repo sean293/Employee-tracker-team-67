@@ -14,19 +14,19 @@ const Home = () => {
 	const {user} = useAuth();
 
 	const handleHome = () => {
-		navigate('/')
+		navigate('/');
 	}
 	const handleProfile = () => {
-		navigate('/profile')
+		navigate(`/reports/${user.username}`);
 	}
 	const handleLogin = () => {
-		navigate('/login')
+		navigate('/login');
 	}
 	const handleBack = () => {
 		window.history.back();
 	}
 	const handleProjects = () => {
-		navigate('/projects')
+		navigate('/projects');
 	}
 
 	return (

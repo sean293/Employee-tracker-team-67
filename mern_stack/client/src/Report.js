@@ -11,8 +11,6 @@ const Report = () => {
 	const navigate = useNavigate();
 	const { selection } = useParams();
 	const {user, logout} = useAuth();
-	const [reportProject, setReportProject] = useState();
-	const [reportUser, setReportUser] = useState();
 	const [clockInOuts, setClockInOuts] = useState([]);
 	const [usernames, setUsernames] = useState([]);
 	const [titles, setTitles] = useState([]);
@@ -32,11 +30,10 @@ const Report = () => {
 						selection: selection
 					}
 				});
-				// console.log(response.data.clockinouts);
 				setClockInOuts(response.data.clockinouts);
 			}
 		} catch (err) {
-			// console.log(err);
+			console.log(err);
 		}
 	};
 
@@ -47,10 +44,9 @@ const Report = () => {
 					userIds: userIds
 				}
 			});
-			console.log("usernames",response.data);
 			setUsernames(response.data);
 		} catch (err) {
-			// console.log(err);
+			console.log(err);
 		}
 	};
 
@@ -61,31 +57,32 @@ const Report = () => {
 					projectIds: projectIds
 				}
 			});
-			console.log("titles",response.data);
 			setTitles(response.data);
 		} catch (err) {
-			// console.log(err);
+			console.log(err);
 		}
 	};
 
+	const fetchData = async () => {
+		setUsernames(fetchUsernames([...new Set(clockInOuts.map(entry => entry.user_id))]));
+		setTitles(fetchTitles([...new Set(clockInOuts.map(entry => entry.project_id))]));
+	};
 
 	useEffect(() => {
 		fetchClockInOuts();
-		console.log("report selection",selection);
-	}, []);
+	}, [selection]);
 
 	useEffect(() => {
-		setUsernames(fetchUsernames([...new Set(clockInOuts.map(entry => entry.user_id))]));
-		setTitles(fetchTitles([...new Set(clockInOuts.map(entry => entry.project_id))]));
-	}, [clockInOuts]); // empty array ensures this effect runs only once
+		fetchData();
+	}, [clockInOuts]);
 
-	useEffect(() => {
-		// console.log(usernames);
-	}, [usernames]);
+	const handleSelectionClick = (item) => {
+		navigate(`/reports/${item}`);
+	};
 
 	return (
 		<div className='content'>
-			<table>
+			{<table>
 				<thead>
 					<tr>
 						<th>User ID</th>
@@ -97,15 +94,15 @@ const Report = () => {
 				<tbody>
 					{clockInOuts && clockInOuts.map(entry => (
 						<tr key={entry._id} className='table-row-data'>
-							<td className='table-data-clickable'>{usernames[entry.user_id]}</td>
-							<td className='table-data-clickable'>{titles[entry.project_id]}</td>
+							<td className='table-data-clickable' onClick={() => handleSelectionClick(usernames[entry.user_id])}>{usernames[entry.user_id]}</td>
+							<td className='table-data-clickable' onClick={() => handleSelectionClick(titles[entry.project_id])}>{titles[entry.project_id]}</td>
 							<td>{new Date(entry.clock_in_time).toLocaleString()}</td>
 							<td>{entry.duration.hours}h {entry.duration.minutes}m {entry.duration.seconds}s</td>
 						</tr>
 					))}
 					
 				</tbody>
-			</table>
+			</table>}
 		</div>
 	);
 };
