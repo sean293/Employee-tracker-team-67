@@ -71,6 +71,7 @@ root.render(
 	<React.StrictMode>
 		<AuthProvider>
 			<RouterProvider router={router} />
+			
 		</AuthProvider>
 	</React.StrictMode>
 );

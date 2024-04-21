@@ -20,7 +20,9 @@ const Report = () => {
 
 	const [showFormTimeChangeRequest, setShowFormTimeChangeRequest] = useState(false);
 
-	const fetchClockInOuts = async () => {
+	
+	const fetchClockInOuts = async () => { 
+		// Function obtains all accessible data for the reports for the user tier
 		var response = null;
 		try {
 			if (!selection) {
@@ -82,6 +84,7 @@ const Report = () => {
 	}, [clockInOuts]);
 
 	const handleSelectionClick = (item) => {
+		//Navigates URL to selected item, (User or Project)
 		navigate(`/reports/${item}`);
 	};
 
