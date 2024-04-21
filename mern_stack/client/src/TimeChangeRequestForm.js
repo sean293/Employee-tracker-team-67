@@ -32,7 +32,7 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		setClockIn(new Date(year, month - 1, day, ampm === 'PM' ? hour + 12 : hour, minute, second));
+		const new_clock_in = new Date(year, month - 1, day, ampm === 'PM' ? hour + 12 : hour, minute, second);
 
 		const duration = {
 			hours: durationHour,
@@ -42,9 +42,7 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 
 		const durationInMillis = 1000 * (3600*durationHour + 60*durationMinute + durationSecond);
 
-		setClockOut(new Date(clockIn.getTime() + durationInMillis));
-
-		await handleTimeChangeRequest(clockinout._id, clockIn, duration);
+		await handleTimeChangeRequest(clockinout._id, new_clock_in, duration, clockinout.project_id, clockinout.user_id);
 	};
 
 	const handleBackgroundClick = (e) => {
@@ -63,7 +61,11 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 	const formatOutput = () => {
 		if (clockOut) {
 			const durationInMillis = 1000 * (3600 * durationHour + 60 * durationMinute + durationSecond);
-			setClockOut(new Date(clockIn.getTime() + durationInMillis));
+			const new_clock_in = new Date(year, month - 1, day, hour + (ampm === 'PM' && hour !== 12 ? 12 : 0), minute, second);
+
+			const new_clock_out = new Date(new_clock_in.getTime() + durationInMillis);
+
+			setClockOut(new_clock_out);
 			setOutDay(clockOut.getDate());
 			setOutMonth(clockOut.getMonth() + 1);
 			setOutYear(clockOut.getFullYear());
@@ -84,7 +86,7 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 
 	return (
 		<div className='form-background' onClick={handleBackgroundClick}>
-			<form className="time-change-request" onSubmit={handleSubmit} >
+			<form className="time-change-request" onSubmit={handleSubmit} onClick={handleBackgroundClick}>
 				<h1 id="first">Clock In Time</h1>
 					<div className='form-section-background'>
 						<input
@@ -182,7 +184,7 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 					
 				<h1>Clock Out Time</h1>
 					<div className='form-section-background'>
-						<p className="out">{outDay}/{outMonth}/{outYear} {outHour}:{String(outMinute).padStart(2, '0')}:{String(outSecond).padStart(2, '0')} {outAmPm}</p>
+						<p className="out">{outMonth}/{outDay}/{outYear} {outHour}:{String(outMinute).padStart(2, '0')}:{String(outSecond).padStart(2, '0')} {outAmPm}</p>
 					</div>
 				<button type="submit" className="submit-project">Submit</button>
 			</form>
