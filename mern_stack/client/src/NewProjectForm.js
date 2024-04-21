@@ -6,13 +6,14 @@ import React, {useState} from 'react';
 
 export default function NewProjectForm({handleNewProject, setShowForm, users}) {
 	const [title, setTitle] = useState('');
+	const [client, setClient] = useState('');
 	const [description, setDescription] = useState('');
 
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		handleNewProject(title, document.getElementById("select-user").value, description);
+		handleNewProject(title, document.getElementById("select-user").value, description, client);
 		setTitle('');
 		setDescription('');
 	};
@@ -40,6 +41,14 @@ export default function NewProjectForm({handleNewProject, setShowForm, users}) {
 					placeholder="Enter Title"
 					value={title}
 					onChange={(e) => setTitle(e.target.value)}
+					required
+				/>
+				<input
+					className="client"
+					type="text"
+					placeholder="Enter Client"
+					value={client}
+					onChange={(e) => setClient(e.target.value)}
 					required
 				/>
 				<select id="select-user" className="select-user" required>

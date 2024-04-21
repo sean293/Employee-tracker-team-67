@@ -11,13 +11,14 @@ export default function NewProjectForm({handleNewUser, setShowForm}) {
 	const [username, setUsername] = useState([]);
 	const [password, setPassword] = useState([]);
 	const [email, setEmail] = useState([]);
+	const [level, setLevel] = useState('Employee');
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
 		console.log("submitted");
 
-		handleNewUser(username, email, password);
+		handleNewUser(username, email, password, level);
 		setTitle('');
 		setDescription('');
 	};
@@ -64,7 +65,11 @@ export default function NewProjectForm({handleNewUser, setShowForm}) {
 					onChange={(e) => setPassword(e.target.value)}
 					required
 				/>
-				<select className="select-user" required>
+				<select
+					className="select-user" 
+					onChange={(e) => setLevel(e.target.value)}
+					value={level}
+					required>
 					{options.map((option, index) => (
 						<option key={index} value={option.value}>{option.label}</option>
 					))}

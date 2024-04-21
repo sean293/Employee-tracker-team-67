@@ -30,7 +30,6 @@ const Home = () => {
 	}
 	const handleBack = () => {
 		window.history.back();
-		refreshPage();
 	}
 	const handleProjects = () => {
 		navigate('/projects');
