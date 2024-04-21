@@ -94,7 +94,7 @@ const Report = () => {
 		setShowFormTimeChangeRequest(true);
 	};
 
-	const handleTimeChangeRequest = async (clockinoutid, clockInTime, duration, projectid) => {
+	const handleTimeChangeRequest = async (clockinoutid, clockInTime, duration, projectid, userid) => {
 
 		try {
 			console.log("time chagne requesting???");
@@ -103,7 +103,7 @@ const Report = () => {
 				newclockintime: clockInTime,
 				newduration: duration,
 				projectid: projectid,
-				userid: user._id
+				userid: userid
 			});
 			setShowFormTimeChangeRequest(false);
 		} catch (err) {

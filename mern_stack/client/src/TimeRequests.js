@@ -19,6 +19,20 @@ const TimeRequests = () => {
         setTimeChangeRequests(response.data.timeChangeRequests);
 	};
 
+    const handleAcceptClick = async (timerequestchange) => {
+		const res = await axios.post('http://localhost:5000/acceptTimeChangeRequest', {
+				timeChangeRequest_id: timerequestchange._id
+		});
+        fetchData();
+	};
+    
+    const handleDeclineClick = async (timerequestchange) => {
+        const res = await axios.post('http://localhost:5000/denyTimeChangeRequest', {
+            timeChangeRequest_id: timerequestchange._id
+		});
+        fetchData();
+	};
+
     const fetchUsernames = async (userIds) => {
 		try {
 			const response = await axios.get('http://localhost:5000/getUsernames', {
@@ -59,14 +73,6 @@ const TimeRequests = () => {
 		fetchUsernamesTitles();
 	}, [timeChangeRequests]);
 
-    const handleAcceptClick = (timerequestchange) => {
-		
-	};
-
-    const handleDeclineClick = (timerequestchange) => {
-		
-	};
-
 	return (
 		<div className='content'>
 			{<table>
@@ -83,8 +89,8 @@ const TimeRequests = () => {
 						<tr key={entry._id} className='table-row-data'>
 							<td className='table-data-clickable'>{usernames[entry.user_id]}</td>
 							<td className='table-data-clickable'>{titles[entry.project_id]}</td>
-							<td>{new Date(entry.clock_in_time).toLocaleString()}</td>
-							<td>{entry.duration.hours}h {entry.duration.minutes}m {entry.duration.seconds}s</td>
+							<td>{new Date(entry.new_clock_in_time).toLocaleString()}</td>
+							<td>{entry.new_duration.hours}h {entry.new_duration.minutes}m {entry.new_duration.seconds}s</td>
 							<td>
 								<button onClick={() => handleAcceptClick(entry)}>✔️</button>
 								<button onClick={() => handleDeclineClick(entry)}>❌</button>
