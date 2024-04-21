@@ -1,6 +1,9 @@
 .project-grid{
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(calc(33.33vw - 20px), 1fr));
+	grid-auto-rows: 15%;
+	text-align: center;
+	align-items: center;
 	position:sticky;
 	height: 85%;
 	gap: 10px;
@@ -8,38 +11,36 @@
 
 .project-grid-item{
 	
-	background-color: #474b58;
 	text-align: center;
-
+	font-family: var(--font_family);
+	font-size: var(--font_size_base);
 	/* margin: 10px; */
-
+	padding: 10px;
+	margin: 1px;
 	justify-content: center;
 	align-items: center;
 
-	border-radius: 15px;
+	border-radius: 55px;
 
 	transition-duration: 0.2s;
-
-	cursor: pointer;
 }
 
-.project-grid-item:hover {
-	background-color: #1d1f25;
+.project-grid-item:hover .project-grid-text{
+	color: var(--secondary_color);
 }
 
 .project-grid-text {
-	font-family: 'Work Sans';
-	font-size: 24px;
+	
 	font-weight: 500;
 
-	color: white;
-	text-decoration: none;
+	
+	/*text-decoration: underline;*/
 	position: relative;
 	top:50%;
 }
 
 .project-background {
-	background-color: #474b58;
+	
 	border-radius: 15px;
 
 	width: 50%;
@@ -57,12 +58,12 @@
 	padding-top: 5%;
 	text-decoration:underline;
 	font-weight: 600;
-	font-size: 48px;
+	font-size: var(--font_size_large);
 }
 
 .project-description {
 	display: block;
-	font-size: 24px;
+	font-size: var(--font_size_base);
 	margin: 0;
 	padding: 0;
 }
@@ -85,7 +86,7 @@
 	left: 50%;
 	width: 50%;
 	height: 50%;
-	font-size: 48px;
+	font-size: var(--font_size_large);
 	font-weight: 700;
 	border-radius: 25px;
 
@@ -100,7 +101,7 @@
 	left: 50%;
 	width: 50%;
 	height: 50%;
-	font-size: 48px;
+	font-size: var(--font_size_large);
 	font-weight: 700;
 }
 
@@ -112,8 +113,8 @@
 
 .form-background{
 	position:absolute;
-	background-color: rgba(0, 0, 0, 0.60);
-	backdrop-filter: blur(20px);
+	background-color: rgba(0, 0, 0, var(--default_alpha*2));
+	backdrop-filter: var(--blur);
 	width:100%;
 	height:100%;
 	top:0;
@@ -128,7 +129,7 @@
 
 	max-height:calc(100% - 130px);
 
-	scrollbar-color: #1d1f25 transparent;
+	scrollbar-color: var(--primary_color);
 	margin:0;
 	margin-right: 10px;
 	margin-top: 5px;

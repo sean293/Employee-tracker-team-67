@@ -10,6 +10,7 @@ import './styles/Login.css'; // Import the custom styles
 import './styles/index.css'
 
 function refreshPage(){ 
+	//Refreshes page (intended to mask desynch issues and data not popping up)
     window.location.reload(); 
 }
 
@@ -30,7 +31,7 @@ const Home = () => {
 	}
 	const handleBack = () => {
 		window.history.back();
-		refreshPage();
+		
 	}
 	const handleProjects = () => {
 		navigate('/projects');

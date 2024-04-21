@@ -6,6 +6,7 @@ import React, {useHistory} from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/index.css';
 import './fonts.css'
+import './styles/global.css'
 
 import Report from './Report';
 import Home from './Home';
