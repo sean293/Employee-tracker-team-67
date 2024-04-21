@@ -20,7 +20,9 @@ const Report = () => {
 
 	const [showFormTimeChangeRequest, setShowFormTimeChangeRequest] = useState(false);
 
-	const fetchClockInOuts = async () => {
+	
+	const fetchClockInOuts = async () => { 
+		// Function obtains all accessible data for the reports for the user tier
 		var response = null;
 		try {
 			if (!selection) {
@@ -69,6 +71,7 @@ const Report = () => {
 	};
 
 	const fetchData = async () => {
+		// Calls necessary functions
 		setUsernames(fetchUsernames([...new Set(clockInOuts.map(entry => entry.user_id))]));
 		setTitles(fetchTitles([...new Set(clockInOuts.map(entry => entry.project_id))]));
 	};
@@ -82,6 +85,7 @@ const Report = () => {
 	}, [clockInOuts]);
 
 	const handleSelectionClick = (item) => {
+		//Navigates URL to selected item, (User or Project)
 		navigate(`/reports/${item}`);
 	};
 
