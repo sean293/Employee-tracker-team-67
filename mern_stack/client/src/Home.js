@@ -9,6 +9,10 @@ import {useAuth} from './AuthContext';
 import './styles/Login.css'; // Import the custom styles
 import './styles/index.css'
 
+function refreshPage(){ 
+    window.location.reload(); 
+}
+
 const Home = () => {
 	const navigate = useNavigate();
 	const {user} = useAuth();
@@ -18,15 +22,19 @@ const Home = () => {
 	}
 	const handleProfile = () => {
 		navigate(`/reports/${user.username}`);
+		refreshPage();
 	}
 	const handleLogin = () => {
 		navigate('/login');
+		refreshPage();
 	}
 	const handleBack = () => {
 		window.history.back();
+		refreshPage();
 	}
 	const handleProjects = () => {
 		navigate('/projects');
+		refreshPage();
 	}
 
 	return (
