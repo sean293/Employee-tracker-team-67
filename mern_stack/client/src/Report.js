@@ -6,11 +6,8 @@ import {useNavigate, useParams} from 'react-router-dom';
 import React, {useState, useEffect} from 'react';
 import {useAuth} from './AuthContext';
 import axios from 'axios';
-<<<<<<< HEAD
 import Chart from 'chart.js/auto';
-=======
 import TimeChangeRequestForm from './TimeChangeRequestForm'
->>>>>>> 16eac179ae643da1965d99fc1258b226646eb1d7
 
 const Report = () => {
 	const navigate = useNavigate();
@@ -20,7 +17,10 @@ const Report = () => {
 	const [usernames, setUsernames] = useState([]);
 	const [titles, setTitles] = useState([]);
 
-<<<<<<< HEAD
+	const [clockInOut, setClockInOut] = useState();
+
+	const [showFormTimeChangeRequest, setShowFormTimeChangeRequest] = useState(false);
+
 	const fetchUsernames = async (userIds) => {
 		try {
 			const response = await axios.get('http://localhost:5000/getUsernames', {
@@ -81,15 +81,6 @@ const Report = () => {
     };
 
 	{/*const fetchClockInOuts = async () => {
-=======
-	const [clockInOut, setClockInOut] = useState();
-
-	const [showFormTimeChangeRequest, setShowFormTimeChangeRequest] = useState(false);
-
-	
-	const fetchClockInOuts = async () => { 
-		// Function obtains all accessible data for the reports for the user tier
->>>>>>> 16eac179ae643da1965d99fc1258b226646eb1d7
 		var response = null;
 		try {
 			if (!selection) {
@@ -111,7 +102,6 @@ const Report = () => {
 		}
 	};*/}
 
-<<<<<<< HEAD
 	
 
 	// Function to fetch clock in/out data
@@ -149,20 +139,6 @@ const Report = () => {
     fetchClockInOuts();
 
 	
-=======
-	const fetchUsernames = async (userIds) => {
-		try {
-			const response = await axios.get('http://localhost:5000/getUsernames', {
-				params: {
-					userIds: userIds
-				}
-			});
-			setUsernames(response.data);
-		} catch (err) {
-			console.log(err);
-		}
-	};
->>>>>>> 16eac179ae643da1965d99fc1258b226646eb1d7
 
 	const fetchTitles = async (projectIds) => {
 		try {
@@ -220,12 +196,8 @@ const Report = () => {
 
 	return (
 		<div className='content'>
-<<<<<<< HEAD
 			<canvas id="barChart"></canvas>
 			<table>
-=======
-			{<table>
->>>>>>> 16eac179ae643da1965d99fc1258b226646eb1d7
 				<thead>
 					<tr>
 						<th>User ID</th>
@@ -248,7 +220,7 @@ const Report = () => {
 					))}
 					
 				</tbody>
-			</table>}
+			</table>
 			{showFormTimeChangeRequest && <TimeChangeRequestForm handleTimeChangeRequest={handleTimeChangeRequest} setShowForm={setShowFormTimeChangeRequest} clockinout={clockInOut} />}
 		</div>
 	);

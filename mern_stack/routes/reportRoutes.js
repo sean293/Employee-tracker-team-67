@@ -104,10 +104,9 @@ module.exports = function(app) {
 			console.log("sending titles back");
 			res.status(200).json(titleMap);
 		} catch (error) {
-		console.log('Error fetching titles:', error);
-		res.status(500).json({ error: 'Internal server error' });
+		  console.error('Error fetching titles:', error);
+		  res.status(500).json({ error: 'Internal server error' });
 		}
-<<<<<<< HEAD
 	  });
 
 	app.get('/getTotalClockedInTime', async (req, res) => {
@@ -147,7 +146,4 @@ module.exports = function(app) {
 			res.status(500).json({ error: 'Internal server error' });
 		}
 		});
-=======
-	});
->>>>>>> 16eac179ae643da1965d99fc1258b226646eb1d7
 };
