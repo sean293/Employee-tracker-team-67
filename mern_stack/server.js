@@ -15,9 +15,11 @@ app.use(express.json());
 const userRoutes = require('./routes/userRoutes');
 const projectRoutes = require('./routes/projectRoutes');
 const reportRoutes = require('./routes/reportRoutes');
+const timeChangeRequestRoutes = require('./routes/timeChangeRoutes');
 userRoutes(app);
 projectRoutes(app);
 reportRoutes(app);
+timeChangeRequestRoutes(app);
 
 
 // connect to MongoDB

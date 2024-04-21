@@ -14,7 +14,7 @@ const TimeChangeRequestSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'ClockInOut'
 	},
-	new_clock_out_time: {
+	new_clock_in_time: {
 		type: Date,
 		default: null
 	},

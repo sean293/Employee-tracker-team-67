@@ -13,13 +13,25 @@ module.exports = function(app) {
 	
 	app.post('/createTimeChangeRequest', async (req, res) => {
 		const { clockinoutid, newclockintime, newduration } = req.body;
-
+		console.log("TIMECHANGEREQUEST");
 		try {
-			let newTimeChangeRequest = new TimeChangeRequest({
-				clock_in_out: clockinoutid,
-				new_clock_in_time: newclockintime,
-				new_duration: newduration
-			});
+			let existingTimeChangeRequest = await TimeChangeRequest.findOne({clock_in_out: clockinoutid});
+			if (existingTimeChangeRequest) {
+				console.log("EXISTING FOUND");
+				existingTimeChangeRequest.clock_in_out = clockinoutid;
+				existingTimeChangeRequest.new_clock_in_time = newclockintime;
+				existingTimeChangeRequest.new_duration = newduration;
+				await existingTimeChangeRequest.save();
+			}
+			else
+			{
+				let newTimeChangeRequest = new TimeChangeRequest({
+					clock_in_out: clockinoutid,
+					new_clock_in_time: newclockintime,
+					new_duration: newduration
+				});
+				await newTimeChangeRequest.save();
+			}
 		} catch (err) {
 			console.error('Error fetching clockinouts:', err);
 		}

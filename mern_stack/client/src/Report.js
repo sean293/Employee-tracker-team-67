@@ -6,6 +6,7 @@ import {useNavigate, useParams} from 'react-router-dom';
 import React, {useState, useEffect} from 'react';
 import {useAuth} from './AuthContext';
 import axios from 'axios';
+import TimeChangeRequestForm from './TimeChangeRequestForm'
 
 const Report = () => {
 	const navigate = useNavigate();
@@ -14,6 +15,10 @@ const Report = () => {
 	const [clockInOuts, setClockInOuts] = useState([]);
 	const [usernames, setUsernames] = useState([]);
 	const [titles, setTitles] = useState([]);
+
+	const [clockInOut, setClockInOut] = useState();
+
+	const [showFormTimeChangeRequest, setShowFormTimeChangeRequest] = useState(false);
 
 	const fetchClockInOuts = async () => {
 		var response = null;
@@ -80,6 +85,27 @@ const Report = () => {
 		navigate(`/reports/${item}`);
 	};
 
+	const handleEditClick = (clockinout) => {
+		setClockInOut(clockinout);
+		console.log("CLOCKINOUT:",clockinout);
+		setShowFormTimeChangeRequest(true);
+	};
+
+	const handleTimeChangeRequest = async (clockinoutid, clockInTime, duration) => {
+
+		try {
+			console.log("time chagne requesting???");
+			const res = await axios.post('http://localhost:5000/createTimeChangeRequest', {
+				clockinoutid: clockinoutid,
+				newclockintime: clockInTime,
+				newduration: duration
+			});
+			setShowFormTimeChangeRequest(false);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 	return (
 		<div className='content'>
 			{<table>
@@ -98,11 +124,15 @@ const Report = () => {
 							<td className='table-data-clickable' onClick={() => handleSelectionClick(titles[entry.project_id])}>{titles[entry.project_id]}</td>
 							<td>{new Date(entry.clock_in_time).toLocaleString()}</td>
 							<td>{entry.duration.hours}h {entry.duration.minutes}m {entry.duration.seconds}s</td>
+							<td>
+								<button onClick={() => handleEditClick(entry)}>🖊️</button>
+							</td>
 						</tr>
 					))}
 					
 				</tbody>
 			</table>}
+			{showFormTimeChangeRequest && <TimeChangeRequestForm handleTimeChangeRequest={handleTimeChangeRequest} setShowForm={setShowFormTimeChangeRequest} clockinout={clockInOut} />}
 		</div>
 	);
 };
