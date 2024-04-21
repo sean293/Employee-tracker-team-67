@@ -44,7 +44,7 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 
 		setClockOut(new Date(clockIn.getTime() + durationInMillis));
 
-		await handleTimeChangeRequest(clockinout._id, clockIn, duration);
+		await handleTimeChangeRequest(clockinout._id, clockIn, duration, clockinout.project_id, clockinout.user_id);
 	};
 
 	const handleBackgroundClick = (e) => {
@@ -74,9 +74,9 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 		}
 	};
 	
-	useEffect(() => {
-		updateOutput();
-	}, [day, month, year, hour, minute, second, ampm]);
+	// useEffect(() => {
+	// 	updateOutput();
+	// }, [day, month, year, hour, minute, second, ampm]);
 	
 	useEffect(() => {
 		formatOutput();
@@ -84,7 +84,7 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 
 	return (
 		<div className='form-background' onClick={handleBackgroundClick}>
-			<form className="time-change-request" onSubmit={handleSubmit} >
+			<form className="time-change-request" onSubmit={handleSubmit} onClick={handleBackgroundClick}>
 				<h1 id="first">Clock In Time</h1>
 					<div className='form-section-background'>
 						<input
@@ -182,7 +182,7 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 					
 				<h1>Clock Out Time</h1>
 					<div className='form-section-background'>
-						<p className="out">{outDay}/{outMonth}/{outYear} {outHour}:{String(outMinute).padStart(2, '0')}:{String(outSecond).padStart(2, '0')} {outAmPm}</p>
+						<p className="out">{outMonth}/{outDay}/{outYear} {outHour}:{String(outMinute).padStart(2, '0')}:{String(outSecond).padStart(2, '0')} {outAmPm}</p>
 					</div>
 				<button type="submit" className="submit-project">Submit</button>
 			</form>
