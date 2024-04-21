@@ -3,9 +3,11 @@
 // controls project requests such as creating new projects and getting all projects under a user
 
 const User = require('../client/models/User');
-const Project = require('../client/models/Project');
-const Association = require('../client/models/Association');
-const ClockInOut = require('../client/models/ClockInOut');
+const Project = require('../client/models/Project')
+const Association = require('../client/models/Association')
+const ClockInOut = require('../client/models/ClockInOut')
+const moment = require('moment');
+
 
 module.exports = function(app) {
 
@@ -102,8 +104,46 @@ module.exports = function(app) {
 			console.log("sending titles back");
 			res.status(200).json(titleMap);
 		} catch (error) {
-		console.log('Error fetching titles:', error);
-		res.status(500).json({ error: 'Internal server error' });
+		  console.error('Error fetching titles:', error);
+		  res.status(500).json({ error: 'Internal server error' });
 		}
-	});
+	  });
+
+	app.get('/getTotalClockedInTime', async (req, res) => {
+		try {
+			// Fetch all users from the database
+			const users = await User.find();
+
+			// Object to store total clocked-in time for each user
+			const totalTimeByUser = {};
+	
+			// Loop through each user and calculate total clocked-in time
+			for (const user of users) {
+				const userId = user._id;
+	
+				// Fetch all clock in entries for the user from the database
+				const clockIns = await ClockInOut.find({ user_id: userId });
+	
+				// Calculate the total time spent clocked in for the user
+				let totalTimeInSeconds = 0;
+				clockIns.forEach(entry => {
+					// Calculate the duration in seconds
+					const durationInSeconds = moment(entry.clock_out_time).diff(moment(entry.clock_in_time), 'seconds');
+	
+					// Add the duration to the total time
+					totalTimeInSeconds += durationInSeconds;
+				});
+	
+				// Store the total time for the user in the object
+				totalTimeByUser[user.username] = totalTimeInSeconds;
+			}
+			console.log("Times: ", totalTimeByUser);
+			// Send the JSON response
+			res.status(200).json(totalTimeByUser);
+
+		} catch (error) {
+			console.error('Error fetching total clocked in time: ', error);
+			res.status(500).json({ error: 'Internal server error' });
+		}
+		});
 };

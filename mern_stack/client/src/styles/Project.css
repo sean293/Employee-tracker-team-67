@@ -61,6 +61,14 @@
 	font-size: var(--font_size_large);
 }
 
+.project-client {
+	display: block;
+	padding-left: 5%;
+	font-style: italic;
+	/* font-weight: 600; */
+	font-size: 36px;
+}
+
 .project-description {
 	display: block;
 	font-size: var(--font_size_base);
@@ -127,12 +135,12 @@
 	word-wrap: break-word;
 	hyphens: auto;
 
-	max-height:calc(100% - 130px);
+	max-height:calc(100% - 200px);
 
 	scrollbar-color: var(--primary_color);
 	margin:0;
 	margin-right: 10px;
-	margin-top: 5px;
+	margin-top: 20px;
 
 	padding-left: 5%;
 	padding-right: 5%;
