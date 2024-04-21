@@ -6,6 +6,14 @@ const mongoose = require('mongoose');
 
 // ClockInOut Schema
 const TimeChangeRequestSchema = new mongoose.Schema({
+	user_id: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User'
+	},
+	project_id: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Project'
+	},
 	project_id: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Project'

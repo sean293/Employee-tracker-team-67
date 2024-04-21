@@ -71,9 +71,8 @@ const Report = () => {
 	};
 
 	const fetchData = async () => {
-		// Calls necessary functions
-		setUsernames(fetchUsernames([...new Set(clockInOuts.map(entry => entry.user_id))]));
-		setTitles(fetchTitles([...new Set(clockInOuts.map(entry => entry.project_id))]));
+		fetchUsernames([...new Set(clockInOuts.map(entry => entry.user_id))]);
+		fetchTitles([...new Set(clockInOuts.map(entry => entry.project_id))]);
 	};
 
 	useEffect(() => {
@@ -95,14 +94,16 @@ const Report = () => {
 		setShowFormTimeChangeRequest(true);
 	};
 
-	const handleTimeChangeRequest = async (clockinoutid, clockInTime, duration) => {
+	const handleTimeChangeRequest = async (clockinoutid, clockInTime, duration, projectid, userid) => {
 
 		try {
 			console.log("time chagne requesting???");
 			const res = await axios.post('http://localhost:5000/createTimeChangeRequest', {
 				clockinoutid: clockinoutid,
 				newclockintime: clockInTime,
-				newduration: duration
+				newduration: duration,
+				projectid: projectid,
+				userid: userid
 			});
 			setShowFormTimeChangeRequest(false);
 		} catch (err) {
