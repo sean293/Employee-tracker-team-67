@@ -17,7 +17,6 @@ export default function EditProjectForm({project, setShowForm}) {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log("SUBMITTING??????????");
 		try {
 			const res = await axios.post('http://localhost:5000/editProject', {
 					usernames: projectUsers,

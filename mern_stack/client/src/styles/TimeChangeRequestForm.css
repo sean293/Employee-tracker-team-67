@@ -1,0 +1,87 @@
+.time-change-request {
+	top:10%;
+}
+
+.time-change-request input{
+	width: 40px;
+	display: inline;
+	background-color: rgba(0,0,0,0.0);
+	margin:0;
+	padding-left:0;
+	padding-right:0;
+	text-align: center;
+
+	font-size: 30px;
+}
+
+.time-change-request input:focus{
+	color: rgba(255,255,255,0.5);
+}
+
+.time-change-request #year{
+	width: 100px;
+}
+
+.time-change-request button{
+	display: block;
+}
+
+.time-change-request p{
+	display: inline;
+	height: 100%;
+	margin:0;
+	padding:0;
+
+	font-size: 30px;
+}
+
+.time-change-request select{
+	display: inline;
+	width: 100px;
+	margin:0;
+	background-color: rgba(71, 75, 88, 0);
+	text-align: center;
+
+	font-size: 30px;
+}
+
+input[type="number"] {
+	-moz-appearance: textfield;
+	-ms-overflow-style: none;
+
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.time-change-request h1{
+	margin-top:40px;
+	text-align: center;
+}
+
+.time-change-request .time-suffix{
+	margin-right:20px;
+}
+
+.time-change-request #first{
+	margin-top:0;
+}
+
+.time-change-request .out{
+	margin: 10px;
+	display:block;
+}
+
+.form-section-background{
+	background-color: #474b58;
+	border-radius: 4px;
+	display:inline-block;
+	margin-bottom: 8px;
+	margin-top: 8px;
+
+	transform: translate(-50%, 0);
+	position: relative;
+	left: 50%;
+}

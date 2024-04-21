@@ -14,9 +14,9 @@ import Projects from './Projects';
 import ErrorPage, {Error} from './ErrorPage';
 import Register from './Register'
 import {AuthProvider} from './AuthContext'
-import ProjectPage from './ProjectPage.js'
+import ProjectPage from './ProjectPage'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
-import ProfilePage from './ProfilePage.js';
+import TimeRequests from './TimeRequests' 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -38,11 +38,6 @@ const router = createBrowserRouter([
 				errorElement: <ErrorPage />, // this is where we are sent if a page that doesn't exist is reached
 			},
 			{
-				path: '/profile',
-				element: <ProfilePage/>,
-				errorElement: <ErrorPage />, // this is where we are sent if a page that doesn't exist is reached
-			},
-			{
 				path: '/projects/:projectName',
 				element: <ProjectPage/>,
 				errorElement: <ErrorPage />, // this is where we are sent if a page that doesn't exist is reached
@@ -61,6 +56,10 @@ const router = createBrowserRouter([
 				element: <Report />,
 			},
 			{
+				path: '/time-requests',
+				element: <TimeRequests />,
+			},
+			{
 				path: '/error',
 				element: <Error />
 			},
@@ -72,6 +71,7 @@ root.render(
 	<React.StrictMode>
 		<AuthProvider>
 			<RouterProvider router={router} />
+			
 		</AuthProvider>
 	</React.StrictMode>
 );

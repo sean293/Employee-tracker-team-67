@@ -6,18 +6,21 @@ import {useNavigate, useParams} from 'react-router-dom';
 import React, {useState, useEffect} from 'react';
 import {useAuth} from './AuthContext';
 import axios from 'axios';
+<<<<<<< HEAD
 import Chart from 'chart.js/auto';
+=======
+import TimeChangeRequestForm from './TimeChangeRequestForm'
+>>>>>>> 16eac179ae643da1965d99fc1258b226646eb1d7
 
 const Report = () => {
 	const navigate = useNavigate();
 	const { selection } = useParams();
 	const {user, logout} = useAuth();
-	const [reportProject, setReportProject] = useState();
-	const [reportUser, setReportUser] = useState();
 	const [clockInOuts, setClockInOuts] = useState([]);
 	const [usernames, setUsernames] = useState([]);
 	const [titles, setTitles] = useState([]);
 
+<<<<<<< HEAD
 	const fetchUsernames = async (userIds) => {
 		try {
 			const response = await axios.get('http://localhost:5000/getUsernames', {
@@ -78,6 +81,15 @@ const Report = () => {
     };
 
 	{/*const fetchClockInOuts = async () => {
+=======
+	const [clockInOut, setClockInOut] = useState();
+
+	const [showFormTimeChangeRequest, setShowFormTimeChangeRequest] = useState(false);
+
+	
+	const fetchClockInOuts = async () => { 
+		// Function obtains all accessible data for the reports for the user tier
+>>>>>>> 16eac179ae643da1965d99fc1258b226646eb1d7
 		var response = null;
 		try {
 			if (!selection) {
@@ -92,14 +104,14 @@ const Report = () => {
 						selection: selection
 					}
 				});
-				// console.log(response.data.clockinouts);
 				setClockInOuts(response.data.clockinouts);
 			}
 		} catch (err) {
-			// console.log(err);
+			console.log(err);
 		}
 	};*/}
 
+<<<<<<< HEAD
 	
 
 	// Function to fetch clock in/out data
@@ -137,6 +149,20 @@ const Report = () => {
     fetchClockInOuts();
 
 	
+=======
+	const fetchUsernames = async (userIds) => {
+		try {
+			const response = await axios.get('http://localhost:5000/getUsernames', {
+				params: {
+					userIds: userIds
+				}
+			});
+			setUsernames(response.data);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+>>>>>>> 16eac179ae643da1965d99fc1258b226646eb1d7
 
 	const fetchTitles = async (projectIds) => {
 		try {
@@ -145,32 +171,61 @@ const Report = () => {
 					projectIds: projectIds
 				}
 			});
-			console.log("titles",response.data);
 			setTitles(response.data);
 		} catch (err) {
-			// console.log(err);
+			console.log(err);
 		}
 	};
 
+	const fetchData = async () => {
+		fetchUsernames([...new Set(clockInOuts.map(entry => entry.user_id))]);
+		fetchTitles([...new Set(clockInOuts.map(entry => entry.project_id))]);
+	};
 
 	useEffect(() => {
 		fetchClockInOuts();
-		console.log("report selection",selection);
-	}, []);
+	}, [selection]);
 
 	useEffect(() => {
-		setUsernames(fetchUsernames([...new Set(clockInOuts.map(entry => entry.user_id))]));
-		setTitles(fetchTitles([...new Set(clockInOuts.map(entry => entry.project_id))]));
-	}, [clockInOuts]); // empty array ensures this effect runs only once
+		fetchData();
+	}, [clockInOuts]);
 
-	useEffect(() => {
-		// console.log(usernames);
-	}, [usernames]);
+	const handleSelectionClick = (item) => {
+		//Navigates URL to selected item, (User or Project)
+		navigate(`/reports/${item}`);
+	};
+
+	const handleEditClick = (clockinout) => {
+		setClockInOut(clockinout);
+		console.log("CLOCKINOUT:",clockinout);
+		setShowFormTimeChangeRequest(true);
+	};
+
+	const handleTimeChangeRequest = async (clockinoutid, clockInTime, duration, projectid, userid) => {
+
+		try {
+			console.log("time chagne requesting???");
+			const res = await axios.post('http://localhost:5000/createTimeChangeRequest', {
+				clockinoutid: clockinoutid,
+				newclockintime: clockInTime,
+				newduration: duration,
+				projectid: projectid,
+				userid: userid
+			});
+			setShowFormTimeChangeRequest(false);
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	return (
 		<div className='content'>
+<<<<<<< HEAD
 			<canvas id="barChart"></canvas>
 			<table>
+=======
+			{<table>
+>>>>>>> 16eac179ae643da1965d99fc1258b226646eb1d7
 				<thead>
 					<tr>
 						<th>User ID</th>
@@ -182,15 +237,19 @@ const Report = () => {
 				<tbody>
 					{clockInOuts && clockInOuts.map(entry => (
 						<tr key={entry._id} className='table-row-data'>
-							<td className='table-data-clickable'>{usernames[entry.user_id]}</td>
-							<td className='table-data-clickable'>{titles[entry.project_id]}</td>
+							<td className='table-data-clickable' onClick={() => handleSelectionClick(usernames[entry.user_id])}>{usernames[entry.user_id]}</td>
+							<td className='table-data-clickable' onClick={() => handleSelectionClick(titles[entry.project_id])}>{titles[entry.project_id]}</td>
 							<td>{new Date(entry.clock_in_time).toLocaleString()}</td>
 							<td>{entry.duration.hours}h {entry.duration.minutes}m {entry.duration.seconds}s</td>
+							<td>
+								<button onClick={() => handleEditClick(entry)}>🖊️</button>
+							</td>
 						</tr>
 					))}
 					
 				</tbody>
-			</table>
+			</table>}
+			{showFormTimeChangeRequest && <TimeChangeRequestForm handleTimeChangeRequest={handleTimeChangeRequest} setShowForm={setShowFormTimeChangeRequest} clockinout={clockInOut} />}
 		</div>
 	);
 };
