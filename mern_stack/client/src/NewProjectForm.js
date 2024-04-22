@@ -36,15 +36,16 @@ export default function NewProjectForm({handleNewProject, setShowForm, users}) {
 		<div className='form-background' onClick={handleBackgroundClick}>
 			<form onSubmit={handleSubmit} >
 				<input
-					className="title"
+					className="title text_input"
 					type="text"
 					placeholder="Enter Title"
 					value={title}
 					onChange={(e) => setTitle(e.target.value)}
 					required
 				/>
+
 				<input
-					className="client"
+					className="client text_input"
 					type="text"
 					placeholder="Enter Client"
 					value={client}
@@ -52,19 +53,20 @@ export default function NewProjectForm({handleNewProject, setShowForm, users}) {
 					required
 				/>
 				<select id="select-user" className="select-user" required>
+
 					{options.map((option, index) => (
 						<option key={index} value={option.value}>{option.label}</option>
 					))}
 				</select>
 				<textarea rows='5' cols='50'
-					className="description"
+					className="description text_input"
 					type="text"
 					placeholder="Enter Description"
 					value={description}
 					onChange={(e) => setDescription(e.target.value)}
 					required
 				/>
-				<button type="submit" className="submit-project">Submit</button>
+				<button type="submit" className="submit-project hov">Submit</button>
 			</form>
 		</div>
 	)
