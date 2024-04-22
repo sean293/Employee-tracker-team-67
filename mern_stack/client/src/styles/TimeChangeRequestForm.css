@@ -75,11 +75,12 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .form-section-background{
-	background-color: #474b58;
+	background-color: var(--primary_color);
 	border-radius: 4px;
 	display:inline-block;
 	margin-bottom: 8px;
 	margin-top: 8px;
+	color: var(--text_color);
 
 	transform: translate(-50%, 0);
 	position: relative;

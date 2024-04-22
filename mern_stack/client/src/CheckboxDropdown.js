@@ -31,7 +31,7 @@ const handleButtonClick = (e) => {
 
 return (
 	<div className="dropdown">
-	<button className="dropdown-toggle" onClick={handleButtonClick}>{selectedOptions.length > 0 ? selectedOptions.join(', ') : 'Select Employees'}</button>
+	<button className="dropdown-toggl text_input" onClick={handleButtonClick}>{selectedOptions.length > 0 ? selectedOptions.join(', ') : 'Select Employees'}</button>
 	<div className="dropdown-content">
 		{users.map((user, index) => (
 		<label key={index}>

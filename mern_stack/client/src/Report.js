@@ -120,6 +120,7 @@ const Report = () => {
 						<th>Project ID</th>
 						<th>Clock In Time</th>
 						<th>Duration</th>
+						<th>Request Edit</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -130,7 +131,7 @@ const Report = () => {
 							<td>{new Date(entry.clock_in_time).toLocaleString()}</td>
 							<td>{entry.duration.hours}h {entry.duration.minutes}m {entry.duration.seconds}s</td>
 							<td>
-								<button onClick={() => handleEditClick(entry)}>🖊️</button>
+								<button class="hov" onClick={() => handleEditClick(entry)}>🖊️</button>
 							</td>
 						</tr>
 					))}
