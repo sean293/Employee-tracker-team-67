@@ -39,7 +39,6 @@ const Report = () => {
 	const renderBarChart = async (data) => {
 		const labels = Object.keys(data).map(userId => usernames[userId]);
 		const values = Object.values(data);
-		const usernamesList = labels;
 
 		console.log("LABELS", Object.values(usernames));
 	

@@ -220,4 +220,5 @@
 	left: 50%;
 	transform: translate(-50%, 0);
 	margin-bottom: 40px;
+	z-index: -1;
 }
