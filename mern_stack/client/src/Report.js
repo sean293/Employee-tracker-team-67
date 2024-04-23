@@ -176,8 +176,13 @@ const Report = () => {
 		}
 	};
 
+	const handleTimeRequest = () => {
+		navigate('/time-requests');
+	}
+
 	return (
 		<div className='content'>
+			{(user.role=="Manager" || user.role=="Administrator") && <button onClick={() => handleTimeRequest()} id="time-requests">Time Requests</button>}
 			<div className="chart-container">
 				<canvas id="barChart"></canvas>
 			</div>
