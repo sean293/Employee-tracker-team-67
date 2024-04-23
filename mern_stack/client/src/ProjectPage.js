@@ -113,7 +113,7 @@ const ProjectPage = () => {
 			<button className="clock-out" onClick={handleClockOut}>Clock Out</button>
 			{project && <div className="project-background">
 				<h1 className="project-title text">{project.title}</h1>
-				<h1 className="project-client">Client: 	{project.client}</h1>
+				<h1 className="project-client text">Client: 	{project.client}</h1>
 				<button className="settings hov" onClick={() => setShowFormSettings(true)}>⚙️</button>
 
 				<div className='scroll-container'>
