@@ -11,7 +11,7 @@ module.exports = function(app) {
 
 	// handles new projects
 	app.post('/newProject', async (req, res) => {
-		const { username, title, description } = req.body;
+		const { username, title, description, client } = req.body;
 		// const projectCount = await Project.countDocuments();
 		// const titleCount = title+projectCount;
 		console.log("creating new project under "+username, title, description);
@@ -20,7 +20,8 @@ module.exports = function(app) {
 			let project = new Project({
 				title: title,
 				manager: user,
-				description: description
+				description: description,
+				client: client
 			});
 			
 			await project.save();
@@ -152,6 +153,15 @@ module.exports = function(app) {
 		// find our user
 		const project = await Project.findOne({title: title});
 		res.status(200).json({ project });
+	});
+
+	app.get('/getProjectFromManager', async (req, res) => {
+		const id = req.query.id;
+
+		// find our user
+		const project = await Project.findOne({manager: id});
+		console.log("getting manager project", project.title);
+		res.status(200).json({project});
 	});
 
 	// handles user clocking into project
