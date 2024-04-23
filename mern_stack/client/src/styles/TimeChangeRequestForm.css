@@ -12,10 +12,11 @@
 	text-align: center;
 
 	font-size: 30px;
+	color: var(--text_color);
 }
 
 .time-change-request input:focus{
-	color: rgba(255,255,255,0.5);
+	color: var(--secondary_color);
 }
 
 .time-change-request #year{
@@ -24,6 +25,7 @@
 
 .time-change-request button{
 	display: block;
+	background-color: var(--primary_color);
 }
 
 .time-change-request p{
@@ -33,13 +35,18 @@
 	padding:0;
 
 	font-size: 30px;
+	color: var(--text_color);
+}
+
+.time-change-request h1{
+	color: var(--primary_color);
 }
 
 .time-change-request select{
 	display: inline;
 	width: 100px;
 	margin:0;
-	background-color: rgba(71, 75, 88, 0);
+	background-color: var(--primary_color);
 	text-align: center;
 
 	font-size: 30px;
