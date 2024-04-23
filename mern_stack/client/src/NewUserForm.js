@@ -42,7 +42,7 @@ export default function NewProjectForm({handleNewUser, setShowForm}) {
 		<div className='form-background' onClick={handleBackgroundClick}>
 			<form onSubmit={handleSubmit} >
 				<input
-					className="username"
+					className="username text_input"
 					type="text"
 					placeholder="Username"
 					value={username}
@@ -50,7 +50,7 @@ export default function NewProjectForm({handleNewUser, setShowForm}) {
 					required
 				/>
 				<input
-					className="email"
+					className="email text_input"
 					type="text"
 					placeholder="Email"
 					value={email}
@@ -58,23 +58,25 @@ export default function NewProjectForm({handleNewUser, setShowForm}) {
 					required
 				/>
 				<input
-					className="password"
+					className="password text_input"
 					type="password"
 					placeholder="Password"
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 					required
 				/>
+
 				<select
-					className="select-user" 
+					className="select-user text_input" 
 					onChange={(e) => setLevel(e.target.value)}
 					value={level}
 					required>
+
 					{options.map((option, index) => (
 						<option key={index} value={option.value}>{option.label}</option>
 					))}
 				</select>
-				<button type="submit" className="submit">Submit</button>
+				<button type="submit" className="submit-project hov">Submit</button>
 			</form>
 		</div>
 	)
