@@ -8,19 +8,18 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
 }
 
 body {
-	background-color: #343741;
+	background-color: var(--background_color);
 }
 
 code {
-font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-	monospace;
+font-family: var(--font_family);
 }
 
 input {
 	box-sizing: border-box;
 
-	font-family: 'Work Sans';
-	font-size: 20px;
+	font-family: var(--font_family);
+	font-size: var(--font_size_base);
 	font-weight: 500;
 
 	width: 100%;
@@ -35,16 +34,16 @@ input {
 	border-width: 0px;
 	border-radius: 4px;
 
-	background-color: #474b58;
-	color:rgb(255, 255, 255);
+	background-color: var(--background_color);
+	color: var(--secondary_color);
 
 }
 
 select {
 	box-sizing: border-box;
 
-	font-family: 'Work Sans';
-	font-size: 20px;
+	font-family: var(--font_family);
+	font-size: var(--font_size_base);
 	font-weight: 500;
 
 	width: 100%;
@@ -57,13 +56,13 @@ select {
 	border-width: 0px;
 	border-radius: 4px;
 
-	background-color: #474b58;
-	color:rgb(255, 255, 255);
+	background-color: var(--background_color);
+	color:var(--text_color);
 }
 
 .select-user option {
-	font-family: 'Work Sans';
-	font-size: 20px;
+	font-family: var(--font_family);
+	font-size: var(--font_size_base);
 	font-weight: 500;
 	
 }
@@ -77,8 +76,8 @@ select {
 textarea {
 	box-sizing: border-box;
 
-	font-family: 'Work Sans';
-	font-size: 20px;
+	font-family: var(--font_family);
+	font-size: var(--font_size_base);
 	font-weight: 500;
 
 	width: 100%;
@@ -91,8 +90,8 @@ textarea {
 	border-width: 0px;
 	border-radius: 4px;
 
-	background-color: #474b58;
-	color:rgb(255, 255, 255);
+	background-color: var(--background_color);
+	color: var(--text_color);
 
 	resize: none;
 
@@ -106,9 +105,7 @@ input:focus{
 	outline: none;
 }
 
-button:hover {
-	background-color: #1d1f25;
-}
+
 
 form{
 	width: 50%;
@@ -119,8 +116,8 @@ form{
 
 button{
 	width: 100%;
-	font-family: 'Work Sans';
-	font-size: 16px;
+	font-family: var(--font_family);
+	font-size: var(--font_size_base);
 	font-weight: 400;
 
 	cursor: pointer;
@@ -133,36 +130,36 @@ button{
 	border-width: 0px;
 	border-radius: 4px;
 
-	background-color: #474b58;
-	color:rgb(255, 255, 255);
+	background-color: var(--secondary_color);
+	color: var(--text_color);
 
 	transition-duration: 0.2s;
 }
 
 p{
-	font-family: 'Work Sans';
-	font-size: 40px;
+	font-family: var(--font_family);
+	font-size: var(--font_size_base);
 	font-weight: 500;
-	color: white;
+	color: var(--text_color);
 }
 
 h1{
-	font-family: 'Work Sans';
+	font-family: var(--font_family);
 	font-size: 40px;
 	font-weight: 500;
 
-	color: white;
+	color: var(--text_color);
 
 	padding: 0;
 	margin: 0;
 }
 
 h2{
-	font-family: 'Work Sans';
+	font-family: var(--font_family);
 	font-size: 20px;
 	font-weight: 500;
 
-	color: white;
+	color: var(--text_color);
 
 	padding: 0;
 	margin: 0;
@@ -200,7 +197,7 @@ h2{
 	top: 0px;
 	width: 100%;
 	height: 100px;
-	background: rgba(0, 0, 0, 0.25);
+	background: var(--navigation_bar_color);
 	justify-content: center;
 }
 
@@ -227,13 +224,16 @@ h2{
     flex-direction: column; /* Arrange children in a column */
     align-items: center; /* Center items horizontally */
     justify-content: center; /* Center items vertically */
+	color: var(--secondary_color);
+	font-family: var(--font_family);
+	font-size: var(--font_size_base);
 }
 
 table {
-	font-family: 'Work Sans';
-	font-size: 40px;
+	font-family: var(--font_family);
+	font-size: var(--font_size_base);
 	font-weight: 500;
-	color: white;
+	color: var(--primary_color);
 
 	width: 100%;
 	text-align: center;
@@ -243,8 +243,8 @@ table {
 
 .table-row-data {
 	width: 100%;
-	font-family: 'Work Sans';
-	font-size: 32px;
+	font-family: var(--font_family);
+	font-size: var(--font_size_base);
 	font-weight: 400;
 
 	padding-top: 10px;
@@ -255,8 +255,8 @@ table {
 	border-width: 0px;
 	border-radius: 16px;
 
-	background-color: none;
-	color:rgb(255, 255, 255);
+	background-color: rgba(0,0,0,var(--default_alpha));
+	color: var(--text_color);
 
 	transition-duration: 0.2s;
 }
@@ -265,6 +265,7 @@ table {
 	cursor: pointer;
 }
 .table-data-clickable:hover {
+
 	color:lightblue;
 }
 
@@ -281,4 +282,5 @@ table {
 .clockinout-container{
 	/* height: 50%; */
 	overflow-y: auto;
+
 }

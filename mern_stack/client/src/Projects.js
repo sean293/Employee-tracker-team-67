@@ -125,16 +125,16 @@ export default function Projects(){
 			{/* maps our list of projects to buttons in the grid */}
 			{projects && projects.map(project => (
 				project !== null && (
-					<div key={project._id} onClick={() => handleProjectClick(project)} className="project-grid-item">
+					<div key={project._id} onClick={() => handleProjectClick(project)} className="project-grid-item hov">
 						<p className="project-grid-text">{project.title}</p>
 					</div>
 				)
 			))}
 			</div>
 			<div className="button-bar">
-				<button className="logout" onClick={handleLogOut}>Log Out</button>
-				{user && (user.role=='Manager'||user.role=='Administrator') && <button className="new-project" onClick={() => setShowFormProject(true)}>New Project</button>}
-				{user && user.role=='Administrator' && <button className="new-user" onClick={() => setShowFormUser(true)}>New User</button>}
+				<button className="logout hov" onClick={handleLogOut}>Log Out</button>
+				{user && (user.role=='Manager'||user.role=='Administrator') && <button className="new-project hov" onClick={() => setShowFormProject(true)}>New Project</button>}
+				{user && user.role=='Administrator' && <button className="new-user hov" onClick={() => setShowFormUser(true)}>New User</button>}
 			</div>
 			{showFormProject && users && <NewProjectForm handleNewProject={handleNewProject} setShowForm={setShowFormProject} users={users} />}
 			{showFormUser && <NewUserForm handleNewUser={handleNewUser} setShowForm={setShowFormUser}/>}
