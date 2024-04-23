@@ -20,10 +20,7 @@ export default function Projects(){
 	const [showFormUser, setShowFormUser] = useState(false);
 
 	const handleNewProject = async (title, username, description, client) => {
-
-		// verify login info
-		// e.preventDefault();
-
+		console.log("CLIENT:",client);
 		try {
 			const res = await axios.post('http://localhost:5000/newProject', {
 				username: username,
