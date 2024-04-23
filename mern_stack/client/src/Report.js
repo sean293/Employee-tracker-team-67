@@ -178,6 +178,7 @@ const Report = () => {
 
 	return (
 		<div className='content'>
+			<button id="time-requests">Time Requests</button>
 			<div className="chart-container">
 				<canvas id="barChart"></canvas>
 			</div>

@@ -44,7 +44,7 @@ export default function Projects(){
 				username,
 				email,
 				password,
-				level
+				role: level
 			});
 			setShowFormUser(false);
 		} catch (err) {
