@@ -64,6 +64,8 @@ module.exports = function(app) {
 	app.post('/acceptTimeChangeRequest', async (req, res) => {
 		const { timeChangeRequest_id} = req.body;
 
+		console.log("ACCEPT");
+
 		try {
 			const timechangerequest = await TimeChangeRequest.findById(timeChangeRequest_id);
 			if (timechangerequest)
@@ -89,7 +91,8 @@ module.exports = function(app) {
 	});
 
 	app.post('/denyTimeChangeRequest', async (req, res) => {
-		console.log("trying to decline");
+
+		console.log("DENY");
 		const { timeChangeRequest_id } = req.body;
 
 		try {
