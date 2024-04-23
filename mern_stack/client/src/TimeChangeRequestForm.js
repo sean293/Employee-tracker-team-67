@@ -97,7 +97,7 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 	return (
 		<div className='form-background' onClick={handleBackgroundClick}>
 			<form className="time-change-request" onSubmit={handleSubmit} onClick={handleBackgroundClick}>
-				<h1 id="first">Clock In Time</h1>
+				<h1 id="first" class= "project-title text">Clock In Time</h1>
 					<div className='form-section-background'>
 						<input
 							id="month"
@@ -161,7 +161,7 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 					</div>
 					
 
-				<h1>Duration</h1>
+				<h1 class= "project-title text" text>Duration</h1>
 					<div className='form-section-background'>
 						<input
 							id="durationHour"
@@ -192,11 +192,11 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 						<p className="time-suffix">s</p>
 					</div>
 					
-				<h1>Clock Out Time</h1>
+				<h1 class= "project-title text">Clock Out Time</h1>
 					<div className='form-section-background'>
 						<p className="out">{outMonth}/{outDay}/{outYear} {outHour}:{String(outMinute).padStart(2, '0')}:{String(outSecond).padStart(2, '0')} {outAmPm}</p>
 					</div>
-				<button type="submit" className="submit-project">Submit</button>
+				<button type="submit" className="submit-project hov">Submit</button>
 			</form>
 		</div>
 	)

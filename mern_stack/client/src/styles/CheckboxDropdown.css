@@ -37,15 +37,16 @@
 
 .dropdown-checkbox {
 	position:absolute;
+	right: 50%;
 }
 
 .dropdown-content {
 	display: none;
 	position: absolute;
-	background-color: #474b58;
+	background-color: var(--secondary_color);
 	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 	z-index: 1;
-	color:white;
+	color:var(--text_color);
 
 	font-family: 'Work Sans';
 	font-size: 20px;

@@ -57,9 +57,9 @@ const Report = () => {
 						datasets: [{
 							label: 'Total Time Clocked In',
 							data: values,
-							backgroundColor: 'rgba(75, 192, 192, 0.2)',
-							borderColor: 'rgba(75, 192, 192, 1)',
-							borderWidth: 1
+							backgroundColor: 'rgba(0, 84, 111, 0.65)',
+							borderColor: 'rgba(0, 84, 111, 1)',
+							borderWidth: 3
 						}]
 					},
 					options: {
@@ -181,7 +181,9 @@ const Report = () => {
 
 	return (
 		<div className='content'>
+
 			{(user.role=="Manager" || user.role=="Administrator") && <button onClick={() => handleTimeRequest()} id="time-requests">Time Requests</button>}
+
 			<div className="chart-container">
 				<canvas id="barChart"></canvas>
 			</div>
@@ -193,6 +195,7 @@ const Report = () => {
 							<th>Project ID</th>
 							<th>Clock In Time</th>
 							<th>Duration</th>
+							<th>Request Edit</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -203,7 +206,7 @@ const Report = () => {
 								<td>{new Date(entry.clock_in_time).toLocaleString()}</td>
 								<td>{entry.duration.hours}h {entry.duration.minutes}m {entry.duration.seconds}s</td>
 								<td>
-									<button onClick={() => handleEditClick(entry)}>🖊️</button>
+									<button class="hov" onClick={() => handleEditClick(entry)}>🖊️</button>
 								</td>
 							</tr>
 						))}
