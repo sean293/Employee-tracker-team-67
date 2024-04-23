@@ -199,6 +199,7 @@ h2{
 	height: 100px;
 	background: var(--navigation_bar_color);
 	justify-content: center;
+	z-index: 999;
 }
 
 .content{
