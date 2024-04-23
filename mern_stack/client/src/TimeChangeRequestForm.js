@@ -29,8 +29,13 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 	const [outSecond, setOutSecond] = useState(clockIn.getSeconds());
 	const [outAmPm, setOutAmPm] = useState(clockIn.getHours() < 12 ? 'AM' : 'PM');
 
+	const [flag, setFlag] = useState(false);
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setShowForm(false);
+
+		console.log("SUBMTITING");
 
 		const new_clock_in = new Date(year, month - 1, day, ampm === 'PM' ? hour + 12 : hour, minute, second);
 
@@ -43,6 +48,7 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 		const durationInMillis = 1000 * (3600*durationHour + 60*durationMinute + durationSecond);
 
 		await handleTimeChangeRequest(clockinout._id, new_clock_in, duration, clockinout.project_id, clockinout.user_id);
+		setShowForm(false);
 	};
 
 	const handleBackgroundClick = (e) => {
@@ -77,12 +83,16 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 	};
 	
 	useEffect(() => {
-		updateOutput();
-	}, [day, month, year, hour, minute, second, ampm]);
+		if (flag)
+		{
+			updateOutput();
+			setFlag(false);
+		}
+	}, [flag]);
 	
-	useEffect(() => {
-		formatOutput();
-	}, [clockOut]);
+	// useEffect(() => {
+	// 	formatOutput();
+	// }, [clockOut]);
 
 	return (
 		<div className='form-background' onClick={handleBackgroundClick}>
@@ -94,7 +104,7 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 							type="number"
 							value={month}
 							placeholder={month}
-							onChange={(e) => setMonth(parseInt(e.target.value))}
+							onChange={(e) => {setMonth(parseInt(e.target.value)); setFlag(true);}}
 							required
 						/>
 						<p>/</p>
@@ -103,7 +113,7 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 							type="number"
 							value={day}
 							placeholder={day}
-							onChange={(e) => setDay(parseInt(e.target.value))}
+							onChange={(e) => {setDay(parseInt(e.target.value)); setFlag(true);}}
 							required
 						/>
 						<p>/</p>
@@ -112,7 +122,7 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 							type="number"
 							value={year}
 							placeholder={year}
-							onChange={(e) => setYear(parseInt(e.target.value))}
+							onChange={(e) => {setYear(parseInt(e.target.value)); setFlag(true);}}
 							required
 						/>
 					</div>
@@ -123,7 +133,7 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 							type="number"
 							value={hour}
 							placeholder={hour}
-							onChange={(e) => setHour(parseInt(e.target.value))}
+							onChange={(e) => {setHour(parseInt(e.target.value)); setFlag(true);}}
 							required
 						/>
 						<p>:</p>
@@ -132,7 +142,7 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 							type="number"
 							value={String(minute).padStart(2, '0')}
 							placeholder={String(minute).padStart(2, '0')}
-							onChange={(e) => setMinute(parseInt(e.target.value))}
+							onChange={(e) => {setMinute(parseInt(e.target.value)); setFlag(true);}}
 							required
 						/>
 						<p>:</p>
@@ -141,7 +151,7 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 							type="number"
 							value={String(second).padStart(2, '0')}
 							placeholder={String(second).padStart(2, '0')}
-							onChange={(e) => setSecond(parseInt(e.target.value))}
+							onChange={(e) => {setSecond(parseInt(e.target.value)); setFlag(true);}}
 							required
 						/>
 						<select value={ampm} onChange={(e) => setAmPm(e.target.value)}>
@@ -158,7 +168,7 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 							type="number"
 							value={durationHour}
 							placeholder={durationHour}
-							onChange={(e) => setDurationHour(parseInt(e.target.value))}
+							onChange={(e) => {setDurationHour(parseInt(e.target.value)); setFlag(true);}}
 							required
 						/>
 						<p className="time-suffix">h</p>
@@ -167,7 +177,7 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 							type="number"
 							value={String(durationMinute).padStart(2, '0')}
 							placeholder={String(durationMinute).padStart(2, '0')}
-							onChange={(e) => setDurationMinute(parseInt(e.target.value))}
+							onChange={(e) => {setDurationMinute(parseInt(e.target.value)); setFlag(true);}}
 							required
 						/>
 						<p className="time-suffix">m</p>
@@ -176,7 +186,7 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 							type="number"
 							value={String(durationSecond).padStart(2, '0')}
 							placeholder={String(durationSecond).padStart(2, '0')}
-							onChange={(e) => setDurationSecond(parseInt(e.target.value))}
+							onChange={(e) => {setDurationSecond(parseInt(e.target.value)); setFlag(true);}}
 							required
 						/>
 						<p className="time-suffix">s</p>
