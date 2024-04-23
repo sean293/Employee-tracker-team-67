@@ -31,7 +31,7 @@ const Home = () => {
 	}
 	const handleBack = () => {
 		window.history.back();
-		
+
 	}
 	const handleProjects = () => {
 		navigate('/projects');

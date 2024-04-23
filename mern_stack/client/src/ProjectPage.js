@@ -115,6 +115,7 @@ const ProjectPage = () => {
 				<h1 className="project-title text">{project.title}</h1>
 				<h1 className="project-client">Client: 	{project.client}</h1>
 				<button className="settings hov" onClick={() => setShowFormSettings(true)}>⚙️</button>
+
 				<div className='scroll-container'>
 					<p className="project-description text">{project.description}</p>
 				</div>

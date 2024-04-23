@@ -265,5 +265,22 @@ table {
 	cursor: pointer;
 }
 .table-data-clickable:hover {
-	color:var(--hover_text_color);
+
+	color:lightblue;
+}
+
+.chart-container{
+    width: 100%;
+	height: 70%;
+	margin: 0 auto;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.clockinout-container{
+	/* height: 50%; */
+	overflow-y: auto;
+
 }

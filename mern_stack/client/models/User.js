@@ -19,7 +19,6 @@ const userSchema = new mongoose.Schema({
 	password: {
 		type: String,
 		required: true,
-		unique: true
 	},
 	clock_in_out_id: {
 		type: mongoose.Schema.Types.ObjectId,
@@ -30,7 +29,7 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		enum: ['Employee', 'Manager', 'Administrator'],
 		default: 'Employee'
-	}
+	},
 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -15,6 +15,10 @@ const projectSchema = new mongoose.Schema({
 	createdAt: {
 		type: Date,
 		default: Date.now
+	},
+	client: {
+		type: String,
+		required: true,
 	}
 });
 

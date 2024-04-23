@@ -19,7 +19,7 @@ export default function Projects(){
 	const [showFormProject, setShowFormProject] = useState(false);
 	const [showFormUser, setShowFormUser] = useState(false);
 
-	const handleNewProject = async (title, username, description) => {
+	const handleNewProject = async (title, username, description, client) => {
 
 		// verify login info
 		// e.preventDefault();
@@ -28,7 +28,8 @@ export default function Projects(){
 			const res = await axios.post('http://localhost:5000/newProject', {
 				username: username,
 				title: title,
-				description: description
+				description: description,
+				client: client
 			});
 			setProjects(res.data.projects);
 			setShowFormProject(false);
@@ -38,14 +39,15 @@ export default function Projects(){
 		fetchProjects();
 	};
 
-	const handleNewUser = async (username, email, password) => {
+	const handleNewUser = async (username, email, password, level) => {
 
 		try {
 			console.log("creating new user");
 			const res = await axios.post('http://localhost:5000/register', {
 				username,
 				email,
-				password
+				password,
+				level
 			});
 			setShowFormUser(false);
 		} catch (err) {
