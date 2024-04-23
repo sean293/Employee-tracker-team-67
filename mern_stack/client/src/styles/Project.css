@@ -43,7 +43,7 @@
 	
 	border-radius: 15px;
 
-	width: 50%;
+	width: 70%;
 	height: 100%;
 
 	position: relative;
@@ -54,11 +54,12 @@
 
 .project-title {
 	display: block;
-	padding-left: 5%;
-	padding-top: 5%;
+	padding-left: 3%;
+	padding-top: 2%;
 	text-decoration:underline;
 	font-weight: 600;
 	font-size: var(--font_size_large);
+	color: var(--secondary_color);
 }
 
 .project-client {
@@ -74,6 +75,7 @@
 	font-size: var(--font_size_base);
 	margin: 0;
 	padding: 0;
+	color: var(--secondary_color);
 }
 
 .error-message{
@@ -89,28 +91,38 @@
 }
 
 .clock-in{
-	background-color: green;
+	background-color: rgb(0, 128, 0);
 	position: absolute;
-	left: 50%;
-	width: 50%;
+	left: 70%;
+	width: 30%;
 	height: 50%;
 	font-size: var(--font_size_large);
 	font-weight: 700;
-	border-radius: 25px;
+	border-radius: 0px;
 
 	box-sizing: border-box;
 	padding: 5px;
 }
+.clock-in:hover{
+	background-color: rgba(0, 128, 0, 0.5);
+	outline: 4px solid rgba(0, 128, 0, 1);
+	color: rgba(0, 128, 0, 1);
+}
 .clock-out{
-	border-radius: 25px;
+	border-radius: 0px;
 	background-color: darkred;
 	position: absolute;
 	top: 50%;
-	left: 50%;
-	width: 50%;
+	left: 70%;
+	width: 30%;
 	height: 50%;
 	font-size: var(--font_size_large);
 	font-weight: 700;
+}
+.clock-out:hover{
+	background-color: rgba(139, 0, 0,0.5);
+	outline: 4px solid rgba(139, 0, 0,1);
+	color: rgba(139, 0, 0,1);
 }
 
 .submit-project{
@@ -208,5 +220,4 @@
 	left: 50%;
 	transform: translate(-50%, 0);
 	margin-bottom: 40px;
-
 }

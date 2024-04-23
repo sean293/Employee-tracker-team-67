@@ -112,11 +112,12 @@ const ProjectPage = () => {
 			<button className="clock-in" onClick={handleClockIn}>Clock In</button>
 			<button className="clock-out" onClick={handleClockOut}>Clock Out</button>
 			{project && <div className="project-background">
-				<h1 className="project-title">{project.title}</h1>
+				<h1 className="project-title text">{project.title}</h1>
 				<h1 className="project-client">Client: 	{project.client}</h1>
-				<button className="settings" onClick={() => setShowFormSettings(true)}>⚙️</button>
+				<button className="settings hov" onClick={() => setShowFormSettings(true)}>⚙️</button>
+
 				<div className='scroll-container'>
-					<p className="project-description">{project.description}</p>
+					<p className="project-description text">{project.description}</p>
 				</div>
 			</div>}
 			{(user.role==="Administrator" || project.manager===user._id) && showFormSettings && <EditProjectForm project={project} setShowForm={setShowFormSettings}/>}

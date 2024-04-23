@@ -52,9 +52,18 @@
     padding: 10px;
     background-color: var(--secondary_color);
     border-radius: 0;
-    outline: 2px ridge;
+    outline: 2px solid var(--secondary_color);
 }
 
 .text_input::placeholder {
     color: var(--text_color);
+}
+
+.text{
+    color: var(--secondary_color);
+    font-family: var(--font_family);
+    font-size: var(--font_size_base);
+    margin: 2px;
+    padding: 2px;
+
 }

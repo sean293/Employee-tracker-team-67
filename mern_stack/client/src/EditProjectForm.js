@@ -76,7 +76,7 @@ export default function EditProjectForm({project, setShowForm}) {
 		<div className='form-background' onClick={handleBackgroundClick}>
 			<form onSubmit={handleSubmit}>
 				<input
-					className="title"
+					className="title text_input"
 					type="text"
 					placeholder={title}
 					value={title}
@@ -85,7 +85,7 @@ export default function EditProjectForm({project, setShowForm}) {
 				/>
 				<CheckboxDropdown users={users} selected={projectUsers} onSelectionChange={handleSelectionChange} />
 				<textarea rows='5' cols='50'
-					className="description"
+					className="description text_input"
 					type="text"
 					placeholder={description}
 					value={description}
