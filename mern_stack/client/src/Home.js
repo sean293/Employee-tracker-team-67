@@ -4,6 +4,7 @@
 
 import {useNavigate, Outlet} from 'react-router-dom';
 import {useAuth} from './AuthContext';
+import axios from 'axios';
 
 
 import './styles/Login.css'; // Import the custom styles
@@ -20,9 +21,26 @@ const Home = () => {
 	const handleHome = () => {
 		navigate('/');
 	}
-	const handleProfile = () => {
-		navigate(`/reports/${user.username}`);
-		refreshPage();
+	const handleProfile = async () => {
+		console.log("ROLE:",user.role);
+		if (user.role === "Administrator")
+		{
+			navigate(`/reports`);
+		}
+		if (user.role === "Manager")
+		{
+			const response = await axios.get('http://localhost:5000/getProjectFromManager', {
+				params: {
+					id: user._id
+				}
+			});
+			navigate(`/reports/${response.data.project.title}`);
+		}
+		if (user.role === "Employee")
+		{
+			navigate(`/reports/${user.username}`);
+		}
+		// refreshPage();
 	}
 	const handleLogin = () => {
 		navigate('/login');

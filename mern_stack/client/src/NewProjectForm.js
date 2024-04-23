@@ -16,6 +16,8 @@ export default function NewProjectForm({handleNewProject, setShowForm, users}) {
 		handleNewProject(title, document.getElementById("select-user").value, description, client);
 		setTitle('');
 		setDescription('');
+		setClient('');
+		setShowForm(false);
 	};
 
 	const handleBackgroundClick = (e) => {

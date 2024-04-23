@@ -9,7 +9,7 @@ module.exports = function(app) {
 
 	// handles registration
 	app.post('/register', async (req, res) => {
-		const {username, email, password} = req.body;
+		const {username, email, password, role} = req.body;
 		console.log("registering user "+username);
 		try {
 
@@ -42,7 +42,8 @@ module.exports = function(app) {
 			user = new User({
 				username,
 				email,
-				password: hashedPassword
+				password: hashedPassword,
+				role: role
 			});
 			
 			await user.save();
