@@ -1,6 +1,6 @@
-// src/projects.js
+// src/TimeRequests.js
 
-// once user is logged in, shows 
+// shows all time requests and allows manager to accept/deny them
 
 import {useNavigate, useParams} from 'react-router-dom';
 import React, {useState, useEffect} from 'react';
@@ -11,29 +11,29 @@ const TimeRequests = () => {
 	const navigate = useNavigate();
 	const {user, logout} = useAuth();
 	const [timeChangeRequests, setTimeChangeRequests] = useState([]);
-    const [usernames, setUsernames] = useState([]);
+	const [usernames, setUsernames] = useState([]);
 	const [titles, setTitles] = useState([]);
 
 	const fetchData = async () => {
 		const response = await axios.get('http://localhost:5000/getAllTimeChangeRequests');
-        setTimeChangeRequests(response.data.timeChangeRequests);
+		setTimeChangeRequests(response.data.timeChangeRequests);
 	};
 
-    const handleAcceptClick = async (timerequestchange) => {
+	const handleAcceptClick = async (timerequestchange) => {
 		const res = await axios.post('http://localhost:5000/acceptTimeChangeRequest', {
 				timeChangeRequest_id: timerequestchange._id
 		});
-        fetchData();
+		fetchData();
 	};
-    
-    const handleDeclineClick = async (timerequestchange) => {
-        const res = await axios.post('http://localhost:5000/denyTimeChangeRequest', {
-            timeChangeRequest_id: timerequestchange._id
+	
+	const handleDeclineClick = async (timerequestchange) => {
+		const res = await axios.post('http://localhost:5000/denyTimeChangeRequest', {
+			timeChangeRequest_id: timerequestchange._id
 		});
-        fetchData();
+		fetchData();
 	};
 
-    const fetchUsernames = async (userIds) => {
+	const fetchUsernames = async (userIds) => {
 		try {
 			const response = await axios.get('http://localhost:5000/getUsernames', {
 				params: {
@@ -59,7 +59,7 @@ const TimeRequests = () => {
 		}
 	};
 
-    const fetchUsernamesTitles = async () => {
+	const fetchUsernamesTitles = async () => {
 		fetchUsernames([...new Set(timeChangeRequests.map(entry => entry.user_id))]);
 		fetchTitles([...new Set(timeChangeRequests.map(entry => entry.project_id))]);
 	};
@@ -69,7 +69,7 @@ const TimeRequests = () => {
 		fetchData();
 	}, []);
 
-    useEffect(() => {
+	useEffect(() => {
 		fetchUsernamesTitles();
 	}, [timeChangeRequests]);
 

@@ -1,6 +1,6 @@
 // src/projects.js
 
-// once user is logged in, shows 
+// once user is logged in, shows all projects they have access to
 
 import {useNavigate} from 'react-router-dom';
 import React, {useState, useEffect} from 'react';

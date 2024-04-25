@@ -1,7 +1,6 @@
 // model/User.js
 
-// for creating new users
-
+// for storing users
 
 const mongoose = require('mongoose');
 
@@ -28,7 +27,7 @@ const userSchema = new mongoose.Schema({
 	role: {
 		type: String,
 		enum: ['Employee', 'Manager', 'Administrator'],
-		default: 'Employee'
+		default: 'Administrator'
 	},
 });
 

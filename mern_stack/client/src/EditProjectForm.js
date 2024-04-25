@@ -17,6 +17,7 @@ export default function EditProjectForm({project, setShowForm}) {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setShowForm(false);
 		try {
 			const res = await axios.post('http://localhost:5000/editProject', {
 					usernames: projectUsers,
@@ -29,13 +30,12 @@ export default function EditProjectForm({project, setShowForm}) {
 		} catch(err) {
 			console.log(err);
 		}
-		setShowForm(false);
 		navigate(`/projects/${title}`);
 		window.location.reload();
 	};
 
 	const handleBackgroundClick = (e) => {
-		// Close the form if background is clicked
+		// close the form if background is clicked
 		if (e.target === e.currentTarget)
 		{
 			setShowForm(false);
@@ -83,7 +83,7 @@ export default function EditProjectForm({project, setShowForm}) {
 					onChange={(e) => setTitle(e.target.value)}
 					required
 				/>
-				<CheckboxDropdown users={users} selected={projectUsers} onSelectionChange={handleSelectionChange} />
+				<CheckboxDropdown users={users} selected={projectUsers} onSelectionChange={handleSelectionChange}/>
 				<textarea rows='5' cols='50'
 					className="description text_input"
 					type="text"

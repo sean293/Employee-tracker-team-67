@@ -4,7 +4,6 @@
 
 const mongoose = require('mongoose');
 
-// Association Schema (Many-to-Many relationship)
 const associationSchema = new mongoose.Schema({
 	user: {
 		type: mongoose.Schema.Types.ObjectId,

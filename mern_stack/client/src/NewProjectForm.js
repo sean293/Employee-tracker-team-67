@@ -21,7 +21,7 @@ export default function NewProjectForm({handleNewProject, setShowForm, users}) {
 	};
 
 	const handleBackgroundClick = (e) => {
-		// Close the form if background is clicked
+		// close the form if background is clicked
 		if (e.target === e.currentTarget)
 		{
 			setShowForm(false);
@@ -55,7 +55,6 @@ export default function NewProjectForm({handleNewProject, setShowForm, users}) {
 					required
 				/>
 				<select id="select-user" className="select-user" required>
-
 					{options.map((option, index) => (
 						<option key={index} value={option.value}>{option.label}</option>
 					))}

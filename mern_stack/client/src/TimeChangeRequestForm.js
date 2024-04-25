@@ -1,14 +1,18 @@
-// src/NewProjectForm.js
+// src/TimeChangeRequestForm.js
 
-// form for creating new project
+// form for creating time change request
 
 import styles from './styles/TimeChangeRequestForm.css'
 
 import React, {useState,useEffect} from 'react';
 
 export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowForm, clockinout}) {
+
+
 	const [clockIn, setClockIn] = useState(new Date(clockinout.clock_in_time));
 	const [clockOut, setClockOut] = useState(null);
+
+
 	const [day, setDay] = useState(clockIn.getDate());
 	const [month, setMonth] = useState(clockIn.getMonth() + 1); 
 	const [year, setYear] = useState(clockIn.getFullYear());
@@ -17,9 +21,11 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 	const [second, setSecond] = useState(clockIn.getSeconds());
 	const [ampm, setAmPm] = useState(clockIn.getHours() < 12 ? 'AM' : 'PM');
 
+
 	const [durationHour, setDurationHour] = useState(clockinout.duration.hours);
 	const [durationMinute, setDurationMinute] = useState(clockinout.duration.minutes);
 	const [durationSecond, setDurationSecond] = useState(clockinout.duration.seconds);
+	
 
 	const [outDay, setOutDay] = useState(clockIn.getDate());
 	const [outMonth, setOutMonth] = useState(clockIn.getMonth() + 1);
@@ -89,10 +95,6 @@ export default function TimeChangeRequestForm({handleTimeChangeRequest, setShowF
 			setFlag(false);
 		}
 	}, [flag]);
-	
-	// useEffect(() => {
-	// 	formatOutput();
-	// }, [clockOut]);
 
 	return (
 		<div className='form-background' onClick={handleBackgroundClick}>

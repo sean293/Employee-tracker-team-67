@@ -5,8 +5,6 @@
 	transform: translate(-50%, -50%);
 
 	width: 50%;
-
-	/* background: rgba(0, 0, 255, 0.278); */
 }
 
 .register {
@@ -15,10 +13,3 @@
 	margin-left: 100%;
 	transform: translate(-100%, 0%);
 }
-
-/* p {
-	font-size: 20px;
-	color: red;
-	position: absolute;
-	top: 75%;
-} */

@@ -1,3 +1,7 @@
+// src/CheckboxDropdown.js
+
+// a custom selection with checkboxs added
+
 import React, { useState, useEffect } from 'react';
 import './styles/CheckboxDropdown.css'
 
@@ -31,7 +35,7 @@ const handleButtonClick = (e) => {
 
 return (
 	<div className="dropdown">
-	<button className="dropdown-toggl text_input" onClick={handleButtonClick}>{selectedOptions.length > 0 ? selectedOptions.join(', ') : 'Select Employees'}</button>
+	<button className="dropdown-toggle text_input" onClick={handleButtonClick}>{selectedOptions.length > 0 ? selectedOptions.join(', ') : 'Select Employees'}</button>
 	<div className="dropdown-content">
 		{users.map((user, index) => (
 		<label key={index}>
