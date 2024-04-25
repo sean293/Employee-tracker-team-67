@@ -1,7 +1,3 @@
-.time-change-request {
-	top:10%;
-}
-
 .time-change-request input{
 	width: 40px;
 	display: inline;
@@ -16,7 +12,7 @@
 }
 
 .time-change-request input:focus{
-	color: var(--secondary_color);
+	color: var(--primary_color);
 }
 
 .time-change-request #year{
@@ -25,7 +21,7 @@
 
 .time-change-request button{
 	display: block;
-	background-color: var(--primary_color);
+	background-color: var(--secondary_color);
 }
 
 .time-change-request p{
@@ -38,15 +34,10 @@
 	color: var(--text_color);
 }
 
-.time-change-request h1{
-	color: var(--primary_color);
-}
-
 .time-change-request select{
 	display: inline;
 	width: 100px;
 	margin:0;
-	background-color: var(--primary_color);
 	text-align: center;
 
 	font-size: 30px;
@@ -64,8 +55,11 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .time-change-request h1{
+	margin: 0;
 	margin-top:40px;
 	text-align: center;
+	padding: 0;
+	color: var(--secondary_color);
 }
 
 .time-change-request .time-suffix{
@@ -82,8 +76,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .form-section-background{
-	background-color: var(--primary_color);
-	border-radius: 4px;
+	background-color: var(--secondary_color);
 	display:inline-block;
 	margin-bottom: 8px;
 	margin-top: 8px;

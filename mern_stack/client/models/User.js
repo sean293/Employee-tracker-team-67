@@ -1,7 +1,6 @@
 // model/User.js
 
-// for creating new users
-
+// for storing users
 
 const mongoose = require('mongoose');
 

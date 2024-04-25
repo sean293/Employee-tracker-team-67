@@ -4,7 +4,6 @@
 
 const mongoose = require('mongoose');
 
-// Project Schema
 const projectSchema = new mongoose.Schema({
 	title: String,
 	manager: {

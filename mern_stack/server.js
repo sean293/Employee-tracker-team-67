@@ -1,15 +1,16 @@
 // server.js
 
+// imports & requirements
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 jwt = require('jsonwebtoken')
 
+// create our express app
 const app = express();
 const PORT = 5000;
 app.use(cors());
 app.use(express.json());
-
 
 // import & use our routes for handling backend requests
 const userRoutes = require('./routes/userRoutes');
@@ -20,7 +21,6 @@ userRoutes(app);
 projectRoutes(app);
 reportRoutes(app);
 timeChangeRequestRoutes(app);
-
 
 // connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/Team67', { useNewUrlParser: true, useUnifiedTopology: true });

@@ -55,7 +55,6 @@ export default function NewProjectForm({handleNewProject, setShowForm, users}) {
 					required
 				/>
 				<select id="select-user" className="select-user" required>
-
 					{options.map((option, index) => (
 						<option key={index} value={option.value}>{option.label}</option>
 					))}

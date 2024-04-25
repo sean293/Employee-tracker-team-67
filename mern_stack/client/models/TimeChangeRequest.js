@@ -1,10 +1,9 @@
 // model/ClockInOut.js
 
-// for tracking user clock in/out
+// for tracking user time change requests
 
 const mongoose = require('mongoose');
 
-// ClockInOut Schema
 const TimeChangeRequestSchema = new mongoose.Schema({
 	user_id: {
 		type: mongoose.Schema.Types.ObjectId,

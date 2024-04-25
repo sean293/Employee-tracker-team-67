@@ -4,7 +4,6 @@
 
 const mongoose = require('mongoose');
 
-// ClockInOut Schema
 const ClockInOutSchema = new mongoose.Schema({
 	user_id: {
 		type: mongoose.Schema.Types.ObjectId,

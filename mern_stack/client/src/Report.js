@@ -32,7 +32,7 @@ const Report = () => {
 			console.log("usernames",response.data);
 			setUsernames(response.data);
 		} catch (err) {
-			// console.log(err);
+			console.log(err);
 		}
 	};
 
@@ -99,27 +99,27 @@ const Report = () => {
 	}, [clockInOuts, usernames]);
 
 	// Function to fetch clock in/out data
-    const fetchClockInOuts = async () => {
-        try {
-            let response = null;
-            if (!selection) {
-                if (user.role === 'Administrator') {
-                    response = await axios.get('http://localhost:5000/getAllClockInOuts');
-                }
-            } else {
-                response = await axios.get('http://localhost:5000/getSelectionClockInOuts', {
-                    params: {
-                        selection: selection
-                    }
-                });
-            }
+	const fetchClockInOuts = async () => {
+		try {
+			let response = null;
+			if (!selection) {
+				if (user.role === 'Administrator') {
+					response = await axios.get('http://localhost:5000/getAllClockInOuts');
+				}
+			} else {
+				response = await axios.get('http://localhost:5000/getSelectionClockInOuts', {
+					params: {
+						selection: selection
+					}
+				});
+			}
 
 			setClockInOuts(response.data.clockinouts);
 
-        } catch (err) {
-            console.error(err);
-        }
-    };
+		} catch (err) {
+			console.error(err);
+		}
+	};
 
 	const fetchTitles = async (projectIds) => {
 		try {
@@ -177,6 +177,7 @@ const Report = () => {
 
 	const handleTimeRequest = () => {
 		navigate('/time-requests');
+		window.location.reload();
 	}
 
 	return (
