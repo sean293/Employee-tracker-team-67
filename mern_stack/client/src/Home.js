@@ -1,6 +1,6 @@
 // src/Home.js
 
-// our main navigation bar at the top
+// our main navigation bar at the top and routing
 
 import {useNavigate, Outlet} from 'react-router-dom';
 import {useAuth} from './AuthContext';
@@ -11,7 +11,7 @@ import './styles/Login.css'; // Import the custom styles
 import './styles/index.css'
 
 function refreshPage(){ 
-	//Refreshes page (intended to mask desynch issues and data not popping up)
+	// refreshes page (intended to mask desynch issues and data not popping up)
     window.location.reload(); 
 }
 
@@ -41,7 +41,6 @@ const Home = () => {
 		{
 			navigate(`/reports/${user.username}`);
 		}
-		// refreshPage();
 	}
 	const handleLogin = () => {
 		navigate('/login');

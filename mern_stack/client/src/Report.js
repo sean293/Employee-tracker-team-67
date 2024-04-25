@@ -1,6 +1,6 @@
-// src/projects.js
+// src/Report.js
 
-// once user is logged in, shows 
+// shows clock in reports 
 
 import {useNavigate, useParams} from 'react-router-dom';
 import React, {useState, useEffect} from 'react';

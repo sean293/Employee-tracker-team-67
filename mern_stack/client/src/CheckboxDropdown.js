@@ -1,3 +1,7 @@
+// src/CheckboxDropdown.js
+
+// a custom selection with checkboxs added
+
 import React, { useState, useEffect } from 'react';
 import './styles/CheckboxDropdown.css'
 

@@ -1,6 +1,6 @@
-// src/NewProjectForm.js
+// src/TimeChangeRequestForm.js
 
-// form for creating new project
+// form for creating time change request
 
 import styles from './styles/TimeChangeRequestForm.css'
 

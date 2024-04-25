@@ -24,7 +24,7 @@ export default function NewProjectForm({handleNewUser, setShowForm}) {
 	};
 
 	const handleBackgroundClick = (e) => {
-		// Close the form if background is clicked
+		// close the form if background is clicked
 		if (e.target === e.currentTarget)
 		{
 			setShowForm(false);
